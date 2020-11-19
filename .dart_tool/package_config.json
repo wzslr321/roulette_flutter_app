@@ -62,16 +62,10 @@
       "languageVersion": "2.10"
     },
     {
-      "name": "http",
-      "rootUri": "file:///home/wiktor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2",
+      "name": "intl",
+      "rootUri": "file:///home/wiktor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.15.8",
       "packageUri": "lib/",
-      "languageVersion": "2.4"
-    },
-    {
-      "name": "http_parser",
-      "rootUri": "file:///home/wiktor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.3"
+      "languageVersion": "2.0"
     },
     {
       "name": "matcher",
@@ -92,10 +86,10 @@
       "languageVersion": "2.10"
     },
     {
-      "name": "pedantic",
-      "rootUri": "file:///home/wiktor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.9.2",
+      "name": "provider",
+      "rootUri": "file:///home/wiktor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/provider-3.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.1"
+      "languageVersion": "2.0"
     },
     {
       "name": "sky_engine",
@@ -158,7 +152,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-11-18T20:53:27.872972Z",
+  "generated": "2020-11-19T15:33:52.723946Z",
   "generator": "pub",
   "generatorVersion": "2.11.0-260.0.dev"
 }

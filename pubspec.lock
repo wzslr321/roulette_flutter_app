@@ -67,20 +67,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  http:
+  intl:
     dependency: "direct main"
     description:
-      name: http
+      name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.2"
-  http_parser:
-    dependency: transitive
-    description:
-      name: http_parser
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.4"
+    version: "0.15.8"
   matcher:
     dependency: transitive
     description:
@@ -102,13 +95,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0-nullsafety.2"
-  pedantic:
-    dependency: transitive
+  provider:
+    dependency: "direct main"
     description:
-      name: pedantic
+      name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.2"
+    version: "3.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
