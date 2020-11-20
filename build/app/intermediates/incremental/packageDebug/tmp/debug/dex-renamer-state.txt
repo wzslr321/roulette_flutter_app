@@ -1,4 +1,4 @@
-#Thu Nov 19 17:31:15 CET 2020
+#Fri Nov 20 19:41:28 CET 2020
 base.0=/home/wiktor/Development/flutter_docker/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

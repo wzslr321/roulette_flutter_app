@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         title:"Money Maker",
         theme: ThemeData(
             primarySwatch: Colors.blueGrey,
-            accentColor: Colors.greenAccent
+            accentColor: Colors.greenAccent,
+            fontFamily: 'Roboto'
         ),
         home:PlaygroundScreen(),
       ),

@@ -1,18 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Lot {
-  final DateTime date = DateTime.now();
-  final bool isExpired;
-  final String lotQuality;
-
-  Lot({this.isExpired = false, this.lotQuality});
-}
-
 enum lotQuality {
   Silver,
   Gold,
-  Platinum,
-  Diamond
 }
 
 class Lots with ChangeNotifier {
@@ -24,8 +14,8 @@ class Lots with ChangeNotifier {
   }
 
   void addLot(lotQuality lotType) {
-    lots += lotType.index + 1;
-
+    lotType.index == 0 ? lots += 1 : lots += lotType.index + 4;
     notifyListeners();
   }
+
 }
