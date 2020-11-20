@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './providers/available_lots.dart';
+import './providers/available_money.dart';
 
 import './screens/tabs_screen.dart';
 import './screens/menu_screen.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => Lots(),
+          create: (_) => Money(),
         )
       ],
       child: MaterialApp(
@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
         routes: {
           ProfileScreen.routeName: (ctx) => TabsScreen(ProfileScreen()),
           RouletteScreen.routeName: (ctx) => TabsScreen(RouletteScreen()),
-          SpeedGameScreen.routeName: (ctx) => TabsScreen(SpeedGameScreen()),
-          ReflexGameScreen.routeName: (ctx) => TabsScreen(ReflexGameScreen())
+          SpeedGameScreen.routeName: (ctx) =>SpeedGameScreen(),
+          ReflexGameScreen.routeName: (ctx) => ReflexGameScreen()
         },
         onUnknownRoute:(settings) {
           return MaterialPageRoute(builder:(ctx) => PageNotFound());

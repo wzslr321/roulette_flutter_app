@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/available_lots.dart';
 import './menu_screen.dart';
 import './profile_screen.dart';
 import './roulette_screen.dart';
@@ -36,8 +34,6 @@ class _TabsScreen extends State<TabsScreen> {
   int _selectedPageIndex = 1;
 
   void _selectPage(int index) {
-    print(index);
-    print(_pages[1]['page']);
     setState(() {
       _selectedPageIndex = index;
     });
@@ -45,7 +41,6 @@ class _TabsScreen extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _lots = Provider.of<Lots>(context);
 
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
@@ -56,18 +51,6 @@ class _TabsScreen extends State<TabsScreen> {
           "Money Maker",
           style: TextStyle(fontWeight: FontWeight.w400),
         ),
-        actions: <Widget>[
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(right: queryData.size.width * 0.05),
-            child: Text(
-              'Lots: ${_lots.lotsQuantity}',
-              style: TextStyle(
-                  fontSize: 16 * queryData.textScaleFactor,
-                  fontWeight: FontWeight.w100),
-            ),
-          ),
-        ],
       ),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(

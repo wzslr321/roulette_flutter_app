@@ -5,7 +5,7 @@ enum lotQuality {
   Gold,
 }
 
-class Lots with ChangeNotifier {
+class Money with ChangeNotifier {
 
   int lots = 0;
 

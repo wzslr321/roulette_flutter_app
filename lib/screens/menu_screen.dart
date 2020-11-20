@@ -47,6 +47,7 @@ class MenuScreen extends StatelessWidget {
                       colors: btnGradient,
                     ),
                     onPressed: () {
+                      print(SpeedGameScreen.routeName);
                       Navigator.of(context).pushNamed(SpeedGameScreen.routeName);
                     },
                     child: DefaultTextWidget(textContent: 'Speed'),
