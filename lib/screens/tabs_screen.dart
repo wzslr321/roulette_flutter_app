@@ -2,24 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/available_lots.dart';
-import './playground_screen.dart';
+import './menu_screen.dart';
+import './profile_screen.dart';
+import './roulette_screen.dart';
+import './speed_game_screen.dart';
+import './reflex_game_screen.dart';
 
 class TabsScreen extends StatefulWidget {
+
+  final Widget displayedScreen;
+
+  TabsScreen(this.displayedScreen);
+
   @override
   _TabsScreen createState() => _TabsScreen();
 }
 
 class _TabsScreen extends State<TabsScreen> {
+  List<Map<String, dynamic>> _pages;
 
-  // final List<Widget> _routes = [
-  //   PlaygroundScreen(),
-  // ];
-  // int _selectedPageIndex = 0;
-  // void _selectPage(int index) {
-  //   setState((){
-  //     _selectedPageIndex = index;
-  //   });
-  // }
+  @override
+  void initState() {
+    _pages =  [
+      { 'page': RouletteScreen(),},
+      { 'page': MenuScreen(),},
+      { 'page': ProfileScreen(),},
+      { 'page': ReflexGameScreen(),},
+      { 'page': SpeedGameScreen(),},
+    ];
+    super.initState();
+  }
+
+  int _selectedPageIndex = 1;
+
+  void _selectPage(int index) {
+    print(index);
+    print(_pages[1]['page']);
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,22 +69,25 @@ class _TabsScreen extends State<TabsScreen> {
           ),
         ],
       ),
-      body: PlaygroundScreen(),
+      body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
-        onTap:null,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.green,
+        currentIndex: _selectedPageIndex,
+        onTap: _selectPage,
         backgroundColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-            icon:Icon(Icons.fifteen_mp),
-            label:"Lorem",
+            icon: Icon(Icons.fifteen_mp),
+            label: "Roulette",
           ),
           BottomNavigationBarItem(
-            icon:Icon(Icons.fifteen_mp),
-            label:"Ipsum",
+            icon: Icon(Icons.fifteen_mp),
+            label: "Menu",
           ),
           BottomNavigationBarItem(
-            icon:Icon(Icons.fifteen_mp),
-            label:"Dolor",
+            icon: Icon(Icons.fifteen_mp),
+            label: "Profile",
           ),
         ],
       ),
