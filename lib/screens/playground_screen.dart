@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/available_lots.dart';
+import '../models/containerized_text_class.dart';
+import '../models/gradient_button_class.dart';
 
 class PlaygroundScreen extends StatelessWidget {
   static const routeName = "/";
@@ -11,28 +11,13 @@ class PlaygroundScreen extends StatelessWidget {
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
 
-    final _lots = Provider.of<Lots>(context);
+    final btnGradient = [
+      Colors.black,
+      Colors.red,
+      Colors.blue,
+    ];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Money Maker",
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-        actions: <Widget>[
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(right: queryData.size.width * 0.05),
-            child: Text(
-              'Lots: ${_lots.lotsQuantity}',
-              style: TextStyle(
-                  fontSize: 16 * queryData.textScaleFactor,
-                  fontWeight: FontWeight.w100),
-            ),
-          ),
-        ],
-      ),
-      body: LayoutBuilder(
+    return LayoutBuilder(
         builder: (context, constraints) => Container(
           color: Colors.green,
           width: constraints.maxWidth * 1,
@@ -40,56 +25,51 @@ class PlaygroundScreen extends StatelessWidget {
           child: Column(
             children:<Widget> [
               Container(
-                height: constraints.maxHeight * 0.25,
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                height: constraints.maxHeight * 0.275,
+                padding:EdgeInsets.symmetric(horizontal: queryData.size.width * 0.05),
                 child: FittedBox(
                   child: Text("Choose what type of game you want to play!"),
                 ),
               ),
               Container(
-                color: Colors.blue,
-                height: constraints.maxHeight * 0.25,
+                color:Colors.purple,
                 width: constraints.maxWidth * 1,
-                child: Column(
-                  children:<Widget> [
-                    Container(
-                      child: FittedBox(
-                        child: Text(
-                          'Speed is sure money, without risk'
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: FittedBox(
-                        child: Text(
-                          '"Reflex" may make you a millionaire or bankrupt! '
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: FittedBox(
-                        child: Text(
-                            'What type of player are you...?'
-                        ),
-                      ),
-                    )
+                height: constraints.maxHeight * 0.4,
+                child: Row(
+                  children: [
+                    GradientBorderButtonContainer(gradient: LinearGradient(
+                      colors:btnGradient,
+                    ), child: DefaultTextWidget(
+                      textContent:'Speed'
+                    ),),
+                    GradientBorderButtonContainer(gradient: LinearGradient(
+                      colors:btnGradient,
+                    ), child: DefaultTextWidget(
+                        textContent:'Reflex'
+                    ),),
                   ],
                 ),
               ),
               Container(
-                color:Colors.purple,
+                color: Colors.blue,
+                height: constraints.maxHeight * 0.325,
                 width: constraints.maxWidth * 1,
-                height: constraints.maxHeight * 0.375,
-                child: InkWell(),
+                child: Column(
+                  children:<Widget> [
+                    DefaultTextWidget(
+                      textContent: '"Speed" is sure money, without a risk',
+                    ),
+                    DefaultTextWidget(
+                      textContent: '"Reflex" may make you a millionaire or bankrupt! ',
+                    ),
+                    DefaultTextWidget(
+                        textContent: 'What type of player are you...?'
+                    )
+                  ],
+                ),
               ),
-              Container(
-                color:Colors.black54,
-                height:constraints.maxHeight * 0.125
-              )
             ],
           ),
-        ),
-      ),
-    );
+        ),);
   }
 }

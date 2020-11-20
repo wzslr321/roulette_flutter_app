@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import './screens/playground_screen.dart';
 import './providers/available_lots.dart';
+import './screens/tabs_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.greenAccent,
             fontFamily: 'Roboto'
         ),
-        home:PlaygroundScreen(),
+        home:TabsScreen(),
       ),
     );
   }
