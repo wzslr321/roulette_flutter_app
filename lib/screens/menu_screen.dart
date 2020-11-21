@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/containerized_text_class.dart';
+import '../models/default_text_class.dart';
 import '../models/gradient_button_class.dart';
 
 import './speed_game_screen.dart';

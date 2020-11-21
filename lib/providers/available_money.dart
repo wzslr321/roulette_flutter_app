@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-enum lotQuality {
+enum moneyQuality {
   Silver,
   Gold,
 }
 
 class Money with ChangeNotifier {
 
-  int lots = 0;
+  int money = 0;
 
-  int get lotsQuantity {
-    return lots;
+  int get quantity {
+    return money;
   }
 
-  void addLot(lotQuality lotType) {
-    lotType.index == 0 ? lots += 1 : lots += lotType.index + 4;
+  void addLot(moneyQuality moneyType) {
+    moneyType.index == 0 ? money += 1 : money += moneyType.index + 4;
     notifyListeners();
   }
 
