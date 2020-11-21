@@ -5,6 +5,7 @@ import '../models/default_text_class.dart';
 import '../widgets/menu_quotes.dart';
 import './reflex_game_screen.dart';
 import './speed_game_screen.dart';
+import '../models/page_view_physics.dart';
 
 class MenuScreen extends StatelessWidget {
   static const routeName = "/";
@@ -51,12 +52,33 @@ class MenuScreen extends StatelessWidget {
               ),
             )),
             height: constraints.maxHeight * 0.4,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GameButton('Speed', ReflexGameScreen.routeName),
-                GameButton('Reflex', SpeedGameScreen.routeName),
-              ],
+            child: ListView.builder(
+              clipBehavior: Clip.antiAlias,
+              scrollDirection: Axis.horizontal,
+              physics: CustomScrollPhysics(itemDimension: 100),
+              itemCount: 3,
+              itemBuilder: (context, index) => index == 0
+                  ? Container(
+                      padding: EdgeInsets.only(
+                          top: queryData.size.height * 0.1,
+                          bottom: queryData.size.height * 0.1,
+                          left: queryData.size.width * 0.35,),
+                      child: GameButton('Speed', ReflexGameScreen.routeName),
+                    ) : index == 1 ?
+                  Container(
+                      padding: EdgeInsets.only(
+                          top: queryData.size.height * 0.1,
+                          bottom: queryData.size.height * 0.1,
+                          left: queryData.size.width * 0.25,
+                          right: queryData.size.width * 0.15),
+                      child: GameButton('Reflex', ReflexGameScreen.routeName),
+                    ) :  Container(
+                padding: EdgeInsets.only(
+                    top: queryData.size.height * 0.1,
+                    bottom: queryData.size.height * 0.1,
+                    left: queryData.size.width * 0.125,
+                    right: queryData.size.width * 0.325),
+                child: GameButton('Reflex', ReflexGameScreen.routeName),),
             ),
           ),
           QuotesContainer(constraints),
