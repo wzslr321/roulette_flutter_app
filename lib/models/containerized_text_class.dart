@@ -7,9 +7,7 @@ class DefaultTextWidget extends StatelessWidget{
   final Color fontColor;
   final TextAlign textAlign;
   final bool isFittedBox;
-  final bool isContainerized;
-  final double width;
-  final double height;
+  final double letterSpacing;
 
   const DefaultTextWidget({
     this.textContent,
@@ -18,9 +16,7 @@ class DefaultTextWidget extends StatelessWidget{
     this.fontColor = Colors.black,
     this.textAlign = TextAlign.center,
     this.isFittedBox = true,
-    this.isContainerized = false,
-    this.width = double.infinity,
-    this.height
+    this.letterSpacing,
   });
 
   @override
@@ -34,17 +30,12 @@ class DefaultTextWidget extends StatelessWidget{
             fontSize: fontSize * curScaleFactor,
             fontWeight: fontWeight,
             color:fontColor,
+            letterSpacing: letterSpacing,
         )
     );
 
-    return isContainerized ? Container (
-      width: width,
-      height: height,
-      child: isFittedBox ? FittedBox(
+    return  isFittedBox ? FittedBox(
             child: textWidget
-        ) : textWidget
-    ) : isFittedBox ? FittedBox(
-        child: textWidget
-    ) : textWidget;
+        ) : textWidget;
   }
 }

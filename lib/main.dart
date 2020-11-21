@@ -23,22 +23,22 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: "Money Maker",
-        theme: ThemeData(
-            primarySwatch: Colors.blueGrey,
-            accentColor: Colors.greenAccent,
-            fontFamily: 'Roboto'),
-        home: TabsScreen(MenuScreen()),
-        routes: {
-          ProfileScreen.routeName: (ctx) => TabsScreen(ProfileScreen()),
-          RouletteScreen.routeName: (ctx) => TabsScreen(RouletteScreen()),
-          SpeedGameScreen.routeName: (ctx) =>SpeedGameScreen(),
-          ReflexGameScreen.routeName: (ctx) => ReflexGameScreen()
-        },
-        onUnknownRoute:(settings) {
-          return MaterialPageRoute(builder:(ctx) => PageNotFound());
-        }
-      ),
+          title: "Money Maker",
+          theme: ThemeData(
+            primarySwatch:Colors.cyan,
+            accentColor: Colors.cyanAccent,
+            fontFamily: 'Roboto',
+          ),
+          home: TabsScreen(MenuScreen()),
+          routes: {
+            ProfileScreen.routeName: (ctx) => TabsScreen(ProfileScreen()),
+            RouletteScreen.routeName: (ctx) => TabsScreen(RouletteScreen()),
+            SpeedGameScreen.routeName: (ctx) => SpeedGameScreen(),
+            ReflexGameScreen.routeName: (ctx) => ReflexGameScreen()
+          },
+          onUnknownRoute: (settings) {
+            return MaterialPageRoute(builder: (ctx) => PageNotFound());
+          }),
     );
   }
 }

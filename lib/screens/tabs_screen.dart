@@ -7,7 +7,6 @@ import './speed_game_screen.dart';
 import './reflex_game_screen.dart';
 
 class TabsScreen extends StatefulWidget {
-
   final Widget displayedScreen;
 
   TabsScreen(this.displayedScreen);
@@ -21,12 +20,22 @@ class _TabsScreen extends State<TabsScreen> {
 
   @override
   void initState() {
-    _pages =  [
-      { 'page': RouletteScreen(),},
-      { 'page': MenuScreen(),},
-      { 'page': ProfileScreen(),},
-      { 'page': ReflexGameScreen(),},
-      { 'page': SpeedGameScreen(),},
+    _pages = [
+      {
+        'page': RouletteScreen(),
+      },
+      {
+        'page': MenuScreen(),
+      },
+      {
+        'page': ProfileScreen(),
+      },
+      {
+        'page': ReflexGameScreen(),
+      },
+      {
+        'page': SpeedGameScreen(),
+      },
     ];
     super.initState();
   }
@@ -41,7 +50,6 @@ class _TabsScreen extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
 
@@ -49,27 +57,27 @@ class _TabsScreen extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(
           "Money Maker",
-          style: TextStyle(fontWeight: FontWeight.w400),
+          style: TextStyle(fontWeight: FontWeight.w100, color: Colors.white),
         ),
       ),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.green,
+        unselectedItemColor: Color.fromRGBO(0, 29, 61, 1),
         currentIndex: _selectedPageIndex,
         onTap: _selectPage,
         backgroundColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.fifteen_mp),
+            icon: Icon(Icons.circle),
             label: "Roulette",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fifteen_mp),
+            icon: Icon(Icons.menu),
             label: "Menu",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fifteen_mp),
+            icon: Icon(Icons.assignment_ind),
             label: "Profile",
           ),
         ],
