@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/menu_game_buttons.dart';
 import '../models/default_text_class.dart';
 import '../widgets/menu_quotes.dart';
-import './reflex_game_screen.dart';
+import '../widgets/scrollable_menu.dart';
+import '../widgets/menu_game_buttons.dart';
+
 import './speed_game_screen.dart';
-import '../models/page_view_physics.dart';
 
 class MenuScreen extends StatelessWidget {
   static const routeName = "/";
@@ -40,6 +40,7 @@ class MenuScreen extends StatelessWidget {
             ),
           ),
           Container(
+            height: constraints.maxHeight * 0.4,
             decoration: BoxDecoration(
                 border: Border(
               top: BorderSide(
@@ -51,34 +52,22 @@ class MenuScreen extends StatelessWidget {
                 color: Color.fromRGBO(0, 29, 61, 0.7),
               ),
             )),
-            height: constraints.maxHeight * 0.4,
-            child: ListView.builder(
-              clipBehavior: Clip.antiAlias,
-              scrollDirection: Axis.horizontal,
-              physics: CustomScrollPhysics(itemDimension: 100),
-              itemCount: 3,
-              itemBuilder: (context, index) => index == 0
-                  ? Container(
-                      padding: EdgeInsets.only(
-                          top: queryData.size.height * 0.1,
-                          bottom: queryData.size.height * 0.1,
-                          left: queryData.size.width * 0.35,),
-                      child: GameButton('Speed', ReflexGameScreen.routeName),
-                    ) : index == 1 ?
-                  Container(
-                      padding: EdgeInsets.only(
-                          top: queryData.size.height * 0.1,
-                          bottom: queryData.size.height * 0.1,
-                          left: queryData.size.width * 0.25,
-                          right: queryData.size.width * 0.15),
-                      child: GameButton('Reflex', ReflexGameScreen.routeName),
-                    ) :  Container(
-                padding: EdgeInsets.only(
-                    top: queryData.size.height * 0.1,
-                    bottom: queryData.size.height * 0.1,
-                    left: queryData.size.width * 0.125,
-                    right: queryData.size.width * 0.325),
-                child: GameButton('Reflex', ReflexGameScreen.routeName),),
+            child: ScrollableMenu(
+              scrollableItems: [
+                GameButton(
+                  itemText: 'Speed',
+                  routeName: SpeedGameScreen.routeName,
+                ),
+                GameButton(
+                  itemText: 'Speed',
+                  routeName: SpeedGameScreen.routeName,
+                ),
+                GameButton(
+                  itemText: 'Speed',
+                  routeName: SpeedGameScreen.routeName,
+                ),
+              ],
+              itemWidth: queryData.size.width * 0.5,
             ),
           ),
           QuotesContainer(constraints),

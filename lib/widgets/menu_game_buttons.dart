@@ -4,10 +4,10 @@ import '../models/gradient_button_class.dart';
 import '../models/default_text_class.dart';
 
 class GameButton extends StatelessWidget {
-  final String text;
+  final String itemText;
   final String routeName;
 
-  GameButton(this.text, this.routeName);
+  GameButton({this.itemText, this.routeName});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,16 @@ class GameButton extends StatelessWidget {
     final MediaQueryData queryData = MediaQuery.of(context);
 
     return GradientBorderButtonContainer(
-      gradient: LinearGradient(
-        colors: btnGradient,
-      ),
-      onPressed: () {
-        Navigator.of(context).pushNamed(routeName);
-      },
-      child: Container(
-        width: queryData.size.width * 0.15,
-        child: DefaultTextWidget(textContent: text, letterSpacing: 0.75),
-      ),
+        gradient: LinearGradient(
+          colors: btnGradient,
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed(routeName);
+        },
+        child: Container(
+          width:  queryData.size.width * 0.5,
+          child: DefaultTextWidget(textContent: itemText, fontSize: 14, fontWeight: FontWeight.w100,),
+        ),
     );
   }
 }
