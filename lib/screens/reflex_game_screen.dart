@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import '../widgets/games_appbar.dart';
 import '../models/default_text_class.dart';
 import '../models/gradient_button_class.dart';
+import '../providers/available_money.dart';
+import 'package:provider/provider.dart';
 
 class ReflexGameScreen extends StatefulWidget {
   static const routeName = '/game/reflex';
@@ -16,13 +18,15 @@ class ReflexGameScreen extends StatefulWidget {
 bool isAccepted;
 int timeDotRender;
 int timeDotTap;
-int userMoney = 0;
+bool isLess;
 
 class _ReflexGameScreenState extends State<ReflexGameScreen> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
+
+    Money _userMoney = Provider.of<Money>(context);
 
     double _randomDoubleLeft = new Random().nextInt(9) / 10;
     double _randomDoubleTop = new Random().nextInt(9) / 10;
@@ -36,9 +40,10 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
     void onDotTap() => {
           setState(() {
             timeDotTap = int.parse(DateFormat.s().format(DateTime.now()));
-            timeDotTap - timeDotRender > 1 ? userMoney -= 15 : userMoney += 5;
+            (timeDotTap - timeDotRender) > 1 ? isLess = true : isLess = false;
             timeDotRender = int.parse(DateFormat.s().format(DateTime.now()));
-          })
+          }),
+           isLess == true ? _userMoney.addLot(moneyQuality.Bronze) : _userMoney.addLot(moneyQuality.Gold)
         };
 
     void _startGame() {
@@ -49,8 +54,8 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
     }
 
     print(isAccepted);
+    print(timeDotTap);
     print(timeDotRender);
-    print(userMoney);
 
     return GameAppBar(
       LayoutBuilder(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum moneyQuality {
-  Silver,
+  Bronze,
   Gold,
 }
 
@@ -14,7 +14,7 @@ class Money with ChangeNotifier {
   }
 
   void addLot(moneyQuality moneyType) {
-    moneyType.index == 0 ? money += 1 : money += moneyType.index + 4;
+    moneyType.index == 0 ? money -= 15 : money += moneyType.index + 4;
     notifyListeners();
   }
 
