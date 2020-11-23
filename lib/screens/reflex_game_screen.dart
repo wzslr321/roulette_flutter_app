@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 import '../widgets/games_appbar.dart';
 import '../models/default_text_class.dart';
@@ -12,6 +13,11 @@ class ReflexGameScreen extends StatefulWidget {
   _ReflexGameScreenState createState() => _ReflexGameScreenState();
 }
 
+bool isAccepted;
+int timeDotRender;
+int timeDotTap;
+int userMoney = 0;
+
 class _ReflexGameScreenState extends State<ReflexGameScreen> {
   @override
   Widget build(BuildContext context) {
@@ -21,19 +27,36 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
     double _randomDoubleLeft = new Random().nextInt(9) / 10;
     double _randomDoubleTop = new Random().nextInt(9) / 10;
 
-    var isAccepted = false;
-
     final btnGradient = [
       Theme.of(context).primaryColor,
       Color.fromRGBO(0, 29, 61, 0.5),
       Theme.of(context).primaryColor,
     ];
 
+    void onDotTap() => {
+          setState(() {
+            timeDotTap = int.parse(DateFormat.s().format(DateTime.now()));
+            timeDotTap - timeDotRender > 1 ? userMoney -= 15 : userMoney += 5;
+            timeDotRender = int.parse(DateFormat.s().format(DateTime.now()));
+          })
+        };
+
+    void _startGame() {
+      setState(() {
+        isAccepted = true;
+        timeDotRender = int.parse(DateFormat.s().format(DateTime.now()));
+      });
+    }
+
+    print(isAccepted);
+    print(timeDotRender);
+    print(userMoney);
+
     return GameAppBar(
       LayoutBuilder(
         builder: (context, constraints) => Column(
           children: [
-            isAccepted == false
+            isAccepted != true
                 ? Container(
                     width: double.infinity,
                     height: constraints.maxHeight * 1,
@@ -46,7 +69,9 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
                             children: [
                               Container(
                                 padding: EdgeInsets.only(
-                                    left: queryData.size.width * 0.05,top:queryData.size.height * 0.05, bottom: queryData.size.height * 0.05),
+                                    left: queryData.size.width * 0.05,
+                                    top: queryData.size.height * 0.05,
+                                    bottom: queryData.size.height * 0.05),
                                 child: DefaultTextWidget(
                                   textContent: 'Accurate tap = +5\$  ',
                                   fontSize: 20,
@@ -68,28 +93,34 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top:constraints.maxHeight * 0.3),
+                          margin:
+                              EdgeInsets.only(top: constraints.maxHeight * 0.3),
                           height: constraints.maxHeight * 0.15,
                           child: GradientBorderButtonContainer(
                               gradient: LinearGradient(
                                 colors: btnGradient,
                               ),
+                              onPressed: _startGame,
                               child: DefaultTextWidget(
+                                fontWeight: FontWeight.w100,
                                 textContent: 'Click to start',
                               )),
                         )
                       ],
                     ),
                   )
-                : Container(
-                    height: constraints.maxHeight * 0.025,
-                    margin: EdgeInsets.only(
-                      left: queryData.size.width * _randomDoubleLeft,
-                      top: queryData.size.height * _randomDoubleTop,
-                    ),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.black,
-                      radius: 50.0,
+                : InkWell(
+                    onTap: onDotTap,
+                    child: Container(
+                      height: constraints.maxHeight * 0.025,
+                      margin: EdgeInsets.only(
+                        left: queryData.size.width * _randomDoubleLeft,
+                        top: queryData.size.height * _randomDoubleTop,
+                      ),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.black,
+                        radius: 50.0,
+                      ),
                     ),
                   ),
           ],
