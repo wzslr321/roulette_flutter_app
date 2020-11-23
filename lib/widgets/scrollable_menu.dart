@@ -45,7 +45,7 @@ class ScrollableMenu extends StatelessWidget {
                             left: (queryData.size.width - itemWidth) / 4)
                         : EdgeInsets.only(
                             top: queryData.size.height * 0.1,
-                            bottom: queryData.size.height * 0.1),
+                            bottom: queryData.size.height * 0.1,),
             child: scrollableItems[index]);
       },
     );

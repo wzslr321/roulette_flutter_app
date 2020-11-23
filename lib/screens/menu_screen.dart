@@ -6,6 +6,7 @@ import '../widgets/scrollable_menu.dart';
 import '../widgets/menu_game_buttons.dart';
 
 import './speed_game_screen.dart';
+import './reflex_game_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   static const routeName = "/";
@@ -55,8 +56,8 @@ class MenuScreen extends StatelessWidget {
             child: ScrollableMenu(
               scrollableItems: [
                 GameButton(
-                  itemText: 'Speed',
-                  routeName: SpeedGameScreen.routeName,
+                  itemText: 'Reflex',
+                  routeName: ReflexGameScreen.routeName,
                 ),
                 GameButton(
                   itemText: 'Speed',
