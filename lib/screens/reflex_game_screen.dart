@@ -39,9 +39,9 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
 
     void onDotTap() => {
           setState(() {
-            timeDotTap = int.parse(DateFormat.s().format(DateTime.now()));
+            timeDotTap = DateTime.now().millisecond;
             (timeDotTap - timeDotRender) > 1 ? isLess = true : isLess = false;
-            timeDotRender = int.parse(DateFormat.s().format(DateTime.now()));
+            timeDotRender = DateTime.now().millisecond;
           }),
            isLess == true ? _userMoney.addLot(moneyQuality.Bronze) : _userMoney.addLot(moneyQuality.Gold)
         };
@@ -49,13 +49,9 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
     void _startGame() {
       setState(() {
         isAccepted = true;
-        timeDotRender = int.parse(DateFormat.s().format(DateTime.now()));
+        timeDotRender = DateTime.now().millisecond;
       });
     }
-
-    print(isAccepted);
-    print(timeDotTap);
-    print(timeDotRender);
 
     return GameAppBar(
       LayoutBuilder(
