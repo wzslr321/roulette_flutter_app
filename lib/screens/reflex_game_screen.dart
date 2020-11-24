@@ -23,8 +23,7 @@ bool _isLess;
 class _ReflexGameScreenState extends State<ReflexGameScreen> {
   @override
   Widget build(BuildContext context) {
-
-     MediaQueryData queryData = MediaQuery.of(context);
+    MediaQueryData queryData = MediaQuery.of(context);
 
     Money _userMoney = Provider.of<Money>(context);
 
@@ -57,7 +56,6 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
       });
     }
 
-
     return GameAppBar(
       LayoutBuilder(
         builder: (context, constraints) => Column(
@@ -68,37 +66,38 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
                     height: constraints.maxHeight * 1,
                     child: Column(
                       children: [
-                        ReflexMenuInformation('Accurate = +5\$', 'Miss = -15\$'),
+                        ReflexMenuInformation(
+                            'Accurate = +5\$', 'Miss = -15\$'),
                         Container(
                           margin:
                               EdgeInsets.only(top: constraints.maxHeight * 0.3),
                           height: constraints.maxHeight * 0.15,
                           child: GradientBorderButtonContainer(
-                              gradient: LinearGradient(
-                                colors: btnGradient,
-                              ),
-                              onPressed: _startGame,
-                              child: DefaultTextWidget(
-                                fontWeight: FontWeight.w100,
-                                textContent: 'Click to start',
-                              )),
-                        )
+                            gradient: LinearGradient(
+                              colors: btnGradient,
+                            ),
+                            onPressed: _startGame,
+                            child: DefaultTextWidget(
+                              fontWeight: FontWeight.w100,
+                              textContent: 'Click to start',
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   )
-                : InkWell(
-                    onTap: onDotTap,
-                    child: Container(
+                :  Container(
                       height: constraints.maxHeight * 0.025,
                       margin: EdgeInsets.only(
                         left: queryData.size.width * _randomDoubleLeft,
                         top: queryData.size.height * _randomDoubleTop,
                       ),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.black,
-                        radius: 50.0,
+                      child: InkWell(
+                        onTap:onDotTap,
+                        child: CircleAvatar(
+                          backgroundColor:Theme.of(context).primaryColor,
+                        ),
                       ),
-                    ),
                   ),
           ],
         ),
