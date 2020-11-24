@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:math';
-import 'package:intl/intl.dart';
 
 import '../widgets/games_appbar.dart';
 import '../models/default_text_class.dart';
 import '../models/gradient_button_class.dart';
 import '../providers/available_money.dart';
-import 'package:provider/provider.dart';
+import '../widgets/reflex_menu_info.dart';
 
 class ReflexGameScreen extends StatefulWidget {
   static const routeName = '/game/reflex';
@@ -15,16 +15,16 @@ class ReflexGameScreen extends StatefulWidget {
   _ReflexGameScreenState createState() => _ReflexGameScreenState();
 }
 
-bool isAccepted;
-int timeDotRender;
-int timeDotTap;
-bool isLess;
+bool _isAccepted;
+int _timeDotRender;
+int _timeDotTap;
+bool _isLess;
 
 class _ReflexGameScreenState extends State<ReflexGameScreen> {
   @override
   Widget build(BuildContext context) {
-    MediaQueryData queryData;
-    queryData = MediaQuery.of(context);
+
+     MediaQueryData queryData = MediaQuery.of(context);
 
     Money _userMoney = Provider.of<Money>(context);
 
@@ -39,60 +39,36 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
 
     void onDotTap() => {
           setState(() {
-            timeDotTap = DateTime.now().millisecond;
-            (timeDotTap - timeDotRender) > 1 ? isLess = true : isLess = false;
-            timeDotRender = DateTime.now().millisecond;
+            _timeDotTap = DateTime.now().millisecond;
+            (_timeDotTap - _timeDotRender) > 1
+                ? _isLess = true
+                : _isLess = false;
+            _timeDotRender = DateTime.now().millisecond;
           }),
-           isLess == true ? _userMoney.addLot(moneyQuality.Bronze) : _userMoney.addLot(moneyQuality.Gold)
+          _isLess == true
+              ? _userMoney.addLot(moneyQuality.Bronze)
+              : _userMoney.addLot(moneyQuality.Gold)
         };
 
     void _startGame() {
       setState(() {
-        isAccepted = true;
-        timeDotRender = DateTime.now().millisecond;
+        _isAccepted = true;
+        _timeDotRender = DateTime.now().millisecond;
       });
     }
+
 
     return GameAppBar(
       LayoutBuilder(
         builder: (context, constraints) => Column(
           children: [
-            isAccepted != true
+            _isAccepted != true
                 ? Container(
                     width: double.infinity,
                     height: constraints.maxHeight * 1,
                     child: Column(
                       children: [
-                        Card(
-                          elevation: 10,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: queryData.size.width * 0.05,
-                                    top: queryData.size.height * 0.05,
-                                    bottom: queryData.size.height * 0.05),
-                                child: DefaultTextWidget(
-                                  textContent: 'Accurate tap = +5\$  ',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w100,
-                                  isFittedBox: false,
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    right: queryData.size.width * 0.05),
-                                child: DefaultTextWidget(
-                                  textContent: 'Miss = -20\$',
-                                  fontWeight: FontWeight.w100,
-                                  fontSize: 20,
-                                  isFittedBox: false,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        ReflexMenuInformation('Accurate = +5\$', 'Miss = -15\$'),
                         Container(
                           margin:
                               EdgeInsets.only(top: constraints.maxHeight * 0.3),
