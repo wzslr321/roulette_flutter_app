@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './providers/available_money.dart';
+import './providers/profile_level_provider.dart';
 
 import './screens/tabs_screen.dart';
 import './screens/menu_screen.dart';
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => Money(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProfileLevel(),
+        ),
       ],
       child: MaterialApp(
           title: "Money Maker",
