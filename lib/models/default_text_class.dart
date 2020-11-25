@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class DefaultTextWidget extends StatelessWidget{
-  @required final String textContent;
+class DefaultTextWidget extends StatelessWidget {
+  @required
+  final String textContent;
   final FontWeight fontWeight;
   final double fontSize;
   final Color fontColor;
@@ -23,19 +24,15 @@ class DefaultTextWidget extends StatelessWidget{
   Widget build(BuildContext context) {
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
 
-    final textWidget = Text(
-        textContent,
-        textAlign:textAlign,
-        style:TextStyle(
-            fontSize: fontSize * curScaleFactor,
-            fontWeight: fontWeight,
-            color:fontColor,
-            letterSpacing: letterSpacing,
-        )
-    );
+    final textWidget = Text(textContent,
+        textAlign: textAlign,
+        style: TextStyle(
+          fontSize: fontSize * curScaleFactor,
+          fontWeight: fontWeight,
+          color: fontColor,
+          letterSpacing: letterSpacing,
+        ));
 
-    return  isFittedBox ? FittedBox(
-            child: textWidget
-        ) : textWidget;
+    return isFittedBox ? FittedBox(child: textWidget) : textWidget;
   }
 }

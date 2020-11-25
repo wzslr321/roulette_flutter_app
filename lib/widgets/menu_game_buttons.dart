@@ -11,25 +11,21 @@ class GameButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final btnGradient = [
-      Theme.of(context).primaryColor,
-      Color.fromRGBO(0, 29, 61, 0.5),
-      Theme.of(context).primaryColor,
-    ];
 
     final MediaQueryData queryData = MediaQuery.of(context);
 
     return GradientBorderButtonContainer(
-        gradient: LinearGradient(
-          colors: btnGradient,
+      onPressed: () {
+        Navigator.of(context).pushNamed(routeName);
+      },
+      child: Container(
+        width: queryData.size.width * 0.5,
+        child: DefaultTextWidget(
+          textContent: itemText,
+          fontSize: 14,
+          fontWeight: FontWeight.w100,
         ),
-        onPressed: () {
-          Navigator.of(context).pushNamed(routeName);
-        },
-        child: Container(
-          width:  queryData.size.width * 0.5,
-          child: DefaultTextWidget(textContent: itemText, fontSize: 14, fontWeight: FontWeight.w100,),
-        ),
+      ),
     );
   }
 }

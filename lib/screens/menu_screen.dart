@@ -54,14 +54,11 @@ class MenuScreen extends StatelessWidget {
               ),
             )),
             child: ScrollableMenu(
+              itemCount: 2,
               scrollableItems: [
                 GameButton(
                   itemText: 'Reflex',
                   routeName: ReflexGameScreen.routeName,
-                ),
-                GameButton(
-                  itemText: 'Speed',
-                  routeName: SpeedGameScreen.routeName,
                 ),
                 GameButton(
                   itemText: 'Speed',

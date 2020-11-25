@@ -25,11 +25,11 @@ class CustomScrollPhysics extends ScrollPhysics {
   }
 
   double _getTargetPixels(
-      ScrollPosition position,
-      Tolerance tolerance,
-      double velocity,
-      double portion,
-      ) {
+    ScrollPosition position,
+    Tolerance tolerance,
+    double velocity,
+    double portion,
+  ) {
     // <--
     double page = _getPage(position, portion);
     // -->
@@ -55,7 +55,8 @@ class CustomScrollPhysics extends ScrollPhysics {
     final Tolerance tolerance = this.tolerance;
     // <--
     final portion = (position.extentInside - itemDimension) / 2;
-    final double target = _getTargetPixels(position, tolerance, velocity, portion);
+    final double target =
+        _getTargetPixels(position, tolerance, velocity, portion);
     // -->
     if (target != position.pixels)
       return ScrollSpringSimulation(spring, position.pixels, target, velocity,

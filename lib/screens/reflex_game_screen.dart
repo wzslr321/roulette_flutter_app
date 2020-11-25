@@ -30,12 +30,6 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
     double _randomDoubleLeft = new Random().nextInt(9) / 10;
     double _randomDoubleTop = new Random().nextInt(9) / 10;
 
-    final btnGradient = [
-      Theme.of(context).primaryColor,
-      Color.fromRGBO(0, 29, 61, 0.5),
-      Theme.of(context).primaryColor,
-    ];
-
     void onDotTap() => {
           setState(() {
             _timeDotTap = DateTime.now().millisecond;
@@ -73,9 +67,6 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
                               EdgeInsets.only(top: constraints.maxHeight * 0.3),
                           height: constraints.maxHeight * 0.15,
                           child: GradientBorderButtonContainer(
-                            gradient: LinearGradient(
-                              colors: btnGradient,
-                            ),
                             onPressed: _startGame,
                             child: DefaultTextWidget(
                               fontWeight: FontWeight.w100,
@@ -86,18 +77,18 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
                       ],
                     ),
                   )
-                :  Container(
-                      height: constraints.maxHeight * 0.025,
-                      margin: EdgeInsets.only(
-                        left: queryData.size.width * _randomDoubleLeft,
-                        top: queryData.size.height * _randomDoubleTop,
+                : Container(
+                    height: constraints.maxHeight * 0.025,
+                    margin: EdgeInsets.only(
+                      left: queryData.size.width * _randomDoubleLeft,
+                      top: queryData.size.height * _randomDoubleTop,
+                    ),
+                    child: InkWell(
+                      onTap: onDotTap,
+                      child: CircleAvatar(
+                        backgroundColor: Theme.of(context).primaryColor,
                       ),
-                      child: InkWell(
-                        onTap:onDotTap,
-                        child: CircleAvatar(
-                          backgroundColor:Theme.of(context).primaryColor,
-                        ),
-                      ),
+                    ),
                   ),
           ],
         ),

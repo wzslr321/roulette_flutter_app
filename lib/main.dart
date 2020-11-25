@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: "Money Maker",
           theme: ThemeData(
-            primarySwatch:Colors.cyan,
+            primarySwatch: Colors.cyan,
             accentColor: Colors.cyanAccent,
             fontFamily: 'Roboto',
           ),

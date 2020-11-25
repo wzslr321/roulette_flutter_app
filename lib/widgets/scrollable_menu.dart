@@ -10,10 +10,12 @@ class ScrollableMenu extends StatelessWidget {
 
   final double itemWidth;
   final double itemHeight;
+  final int itemCount;
 
   ScrollableMenu(
       {@required this.scrollableItems,
       @required this.itemWidth,
+      @required this.itemCount,
       this.padding,
       this.itemHeight});
 
@@ -25,7 +27,7 @@ class ScrollableMenu extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       scrollDirection: Axis.horizontal,
       physics: CustomScrollPhysics(itemDimension: 100),
-      itemCount: 3,
+      itemCount: itemCount,
       itemBuilder: (context, index) {
         return Container(
             width: itemWidth,
@@ -45,7 +47,8 @@ class ScrollableMenu extends StatelessWidget {
                             left: (queryData.size.width - itemWidth) / 4)
                         : EdgeInsets.only(
                             top: queryData.size.height * 0.1,
-                            bottom: queryData.size.height * 0.1,),
+                            bottom: queryData.size.height * 0.1,
+                          ),
             child: scrollableItems[index]);
       },
     );

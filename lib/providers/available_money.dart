@@ -6,7 +6,6 @@ enum moneyQuality {
 }
 
 class Money with ChangeNotifier {
-
   int money = 0;
 
   int get quantity {
@@ -17,5 +16,4 @@ class Money with ChangeNotifier {
     moneyType.index == 0 ? money -= 15 : money += moneyType.index + 4;
     notifyListeners();
   }
-
 }
