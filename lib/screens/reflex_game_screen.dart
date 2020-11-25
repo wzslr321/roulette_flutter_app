@@ -21,14 +21,22 @@ int _timeDotTap;
 bool _isLess;
 
 class _ReflexGameScreenState extends State<ReflexGameScreen> {
+
+  double _randomDoubleLeft = new Random().nextInt(9) / 10;
+  double _randomDoubleTop = new Random().nextInt(9) / 10;
+
+  void _startGame() {
+    setState(() {
+      _isAccepted = true;
+      _timeDotRender = DateTime.now().millisecond;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
 
     Money _userMoney = Provider.of<Money>(context);
-
-    double _randomDoubleLeft = new Random().nextInt(9) / 10;
-    double _randomDoubleTop = new Random().nextInt(9) / 10;
 
     void onDotTap() => {
           setState(() {
@@ -42,13 +50,6 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
               ? _userMoney.addLot(moneyQuality.Bronze)
               : _userMoney.addLot(moneyQuality.Gold)
         };
-
-    void _startGame() {
-      setState(() {
-        _isAccepted = true;
-        _timeDotRender = DateTime.now().millisecond;
-      });
-    }
 
     return GameAppBar(
       LayoutBuilder(
