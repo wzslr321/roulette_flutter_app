@@ -16,40 +16,46 @@ class ReflexGameScreen extends StatefulWidget {
 }
 
 bool _isAccepted;
-int _timeDotRender;
-int _timeDotTap;
+int _timeDotRenderMs;
+int _timeDotRenderS;
+int _timeDotTapMs;
+int _timeDotTapS;
 bool _isLess;
 
 class _ReflexGameScreenState extends State<ReflexGameScreen> {
-
-  double _randomDoubleLeft = new Random().nextInt(9) / 10;
-  double _randomDoubleTop = new Random().nextInt(9) / 10;
-
-  void _startGame() {
-    setState(() {
-      _isAccepted = true;
-      _timeDotRender = DateTime.now().millisecond;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    double _randomDoubleLeft = new Random().nextInt(9) / 10;
+    double _randomDoubleTop = new Random().nextInt(9) / 10;
+
     MediaQueryData queryData = MediaQuery.of(context);
 
     Money _userMoney = Provider.of<Money>(context);
 
     void onDotTap() => {
+
           setState(() {
-            _timeDotTap = DateTime.now().millisecond;
-            (_timeDotTap - _timeDotRender) > 1
-                ? _isLess = true
-                : _isLess = false;
-            _timeDotRender = DateTime.now().millisecond;
+            _timeDotTapMs = DateTime.now().millisecond;
+            _timeDotTapS = DateTime.now().second;
+            ((_timeDotTapMs - _timeDotRenderMs) < 1 &&  (_timeDotTapS - _timeDotRenderS) == 0) || ((_timeDotTapMs - _timeDotRenderMs) > 1 && (_timeDotTapS - _timeDotRenderS) == 1)
+                ? _isLess = false
+                : _isLess = true;
+            _timeDotRenderMs = DateTime.now().millisecond;
+            _timeDotRenderS = DateTime.now().second;
+            _isLess == true
+                ? _userMoney.addLot(moneyQuality.Bronze)
+                : _userMoney.addLot(moneyQuality.Gold);
           }),
-          _isLess == true
-              ? _userMoney.addLot(moneyQuality.Bronze)
-              : _userMoney.addLot(moneyQuality.Gold)
+
         };
+
+    void _startGame() {
+      setState(() {
+        _isAccepted = true;
+        _timeDotRenderMs = DateTime.now().millisecond;
+        _timeDotRenderS = DateTime.now().second;
+      });
+    }
 
     return GameAppBar(
       LayoutBuilder(

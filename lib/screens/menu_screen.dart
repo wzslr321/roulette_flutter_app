@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/default_text_class.dart';
+import '../widgets/menu_and_profile_header.dart';
 import '../widgets/menu_quotes.dart';
 import '../widgets/scrollable_menu.dart';
 import '../widgets/menu_game_buttons.dart';
@@ -18,28 +18,7 @@ class MenuScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: <Widget>[
-          Container(
-            height: constraints.maxHeight * 0.275,
-            alignment: Alignment.center,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: queryData.size.height * 0.01,
-                  horizontal: queryData.size.width * 0.025),
-              margin:
-                  EdgeInsets.symmetric(horizontal: queryData.size.width * 0.05),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Color.fromRGBO(0, 29, 61, 0.7), width: 1.5),
-                ),
-              ),
-              child: DefaultTextWidget(
-                textContent: "Choose what type of game you want to play!",
-                fontWeight: FontWeight.bold,
-                fontSize: 22 * queryData.textScaleFactor,
-              ),
-            ),
-          ),
+          HeaderInformation(constraints, queryData, 0.275, 'Choose what type of game You want to play!'),
           Container(
             height: constraints.maxHeight * 0.4,
             decoration: BoxDecoration(
