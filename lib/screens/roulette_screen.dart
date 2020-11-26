@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../models/default_text_class.dart';
 import '../widgets/roulette_item.dart';
 
 class RouletteScreen extends StatefulWidget {
@@ -18,7 +17,7 @@ class _RouletteScreenState extends State<RouletteScreen>
 
   void _roll() {
     _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1), value: 0.25, lowerBound: 0.25, upperBound: 0.5);
+        AnimationController(vsync: this, duration: const Duration(seconds: 1), value: 0.5, lowerBound: 0.25, upperBound: 1.0);
     _animationController.addListener(() {
       _animationController.isCompleted
           ? _animationController.forward()
@@ -58,8 +57,8 @@ class _RouletteScreenState extends State<RouletteScreen>
     MediaQueryData queryData = MediaQuery.of(context);
 
     _animation =
-        CurvedAnimation(parent: _animationController, curve: Curves.linear);
-    _animation = Tween(begin:-1.0, end: 1.0).animate(_animation);
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
+    _animation = Tween(begin:-1.0, end: 51.0).animate(_animation);
 
     return Container(
       width: queryData.size.width,
@@ -83,7 +82,7 @@ class _RouletteScreenState extends State<RouletteScreen>
                 )),
           ),
           InkWell(
-            onTap: _roll,
+            onTap:_roll,
             child:Container(
               child: Text("tap"),
             )
