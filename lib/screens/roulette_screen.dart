@@ -11,10 +11,24 @@ class RouletteScreen extends StatefulWidget {
 }
 
 class _RouletteScreenState extends State<RouletteScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   Animation _animation;
   AnimationController _animationController;
 
+
+  void _roll() {
+    _animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1), value: 0.25, lowerBound: 0.25, upperBound: 0.5);
+    _animationController.addListener(() {
+      _animationController.isCompleted
+          ? _animationController.forward()
+          : _animationController.isDismissed
+          ? _animationController.forward()
+          : setState(() {});
+    });
+
+    _animationController.forward();
+  }
 
 
   @override
@@ -45,7 +59,7 @@ class _RouletteScreenState extends State<RouletteScreen>
 
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.linear);
-    _animation = Tween(begin:-0.5, end: 0.5).animate(_animation);
+    _animation = Tween(begin:-1.0, end: 1.0).animate(_animation);
 
     return Container(
       width: queryData.size.width,
@@ -68,6 +82,12 @@ class _RouletteScreenState extends State<RouletteScreen>
                   ],
                 )),
           ),
+          InkWell(
+            onTap: _roll,
+            child:Container(
+              child: Text("tap"),
+            )
+          )
           // Transform(
           //   alignment: FractionalOffset(0.5,0.0),
           //   transform: Matrix4.rotationZ(_animation.value),
