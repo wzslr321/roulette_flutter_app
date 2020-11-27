@@ -5,6 +5,7 @@ import '../widgets/roulette_item.dart';
 import '../models/default_text_class.dart';
 
 class RouletteScreen extends StatefulWidget {
+  RouletteScreen({Key key}) : super(key:key);
   static const routeName = '/roulette';
 
   @override
@@ -25,6 +26,7 @@ class _RouletteScreenState extends State<RouletteScreen>
   bool didStart = false;
   bool isRedOnTween;
   possibleBets userBet;
+  String moneyInvested;
 
   void _roll() {
     tweenEnd = 0;
@@ -81,10 +83,19 @@ class _RouletteScreenState extends State<RouletteScreen>
     });
   }
 
+  void investMoney(val) {
+    setState(() {
+      moneyInvested = val;
+    });
+  }
+
+
   double tweenEnd = 0;
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+
     MediaQueryData queryData = MediaQuery.of(context);
 
     if (tweenEnd == 0) {
@@ -93,6 +104,8 @@ class _RouletteScreenState extends State<RouletteScreen>
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animation = Tween(begin: -1.0, end: tweenEnd).animate(_animation);
+
+    print(moneyInvested);
 
     return Container(
       width: queryData.size.width,
@@ -159,7 +172,40 @@ class _RouletteScreenState extends State<RouletteScreen>
             child:DefaultTextWidget(
               textContent:'Bet on red',
             ),
+          ),
+          Form(
+            key:_formKey,
+            child: Column(
+              children:<Widget> [
+                TextFormField(
+                  decoration: const InputDecoration(
+                      hintText: 'How much do you want to bet?'
+                  ),
+                  validator: (value) {
+                    if(value.isEmpty){
+                      return 'Please enter money amount first';
+                    }
+                    investMoney(value);
+                    return 'You just invested $value\$. You can now bet it!';
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: (){
+                    if(_formKey.currentState.validate()){
+                      investMoney(moneyInvested);
+                    }
+                  },
+                  child: Text("Submit"),
+                )
+              ],
+            ),
+          ),
+          Container(
+            child: DefaultTextWidget(
+              textContent: moneyInvested == null ? 'Your money deposit is empty' : 'You have $moneyInvested\$ in deposit'
+            ),
           )
+
           // Transform(
           //   alignment: FractionalOffset(0.5,0.0),
           //   transform: Matrix4.rotationZ(_animation.value),
