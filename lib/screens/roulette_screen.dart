@@ -18,17 +18,20 @@ class _RouletteScreenState extends State<RouletteScreen>
 
   bool didWin;
   bool didEnd;
-  bool isRedOnTween;
+  bool isRedOnTween = false;
 
 
   void _roll() {
+    tweenEnd = 0;
     _animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 10), value: 0.1, lowerBound: 0.0, upperBound:1.0, );
     _animationController.addListener(() {
       if(_animationController.isCompleted){
         _animationController.forward();
         setState(() {
-          didEnd = true;
+          String _convertedTween = tweenEnd.toString();
+          int.parse(_convertedTween[3])  < 5 ? isRedOnTween = true : isRedOnTween = false;
+          print(_convertedTween[3]);
         });
       } else {
         _animationController.isDismissed
@@ -54,25 +57,22 @@ class _RouletteScreenState extends State<RouletteScreen>
     _animationController.dispose();
   }
 
-
+  double tweenEnd = 0;
 
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
-    double tweenEnd = 0;
-    double finalTween;
-    tweenEnd =  new Random().nextInt(100) / 10 + 20;
-    if(didEnd == true) {
-      finalTween = tweenEnd;
-      print(finalTween);
-      String convertedTween = finalTween.toString();
-      int.parse(convertedTween[3])  < 5 ? isRedOnTween = true : isRedOnTween = false;
-      print(convertedTween[3]);
-      print(isRedOnTween);
+
+    if(tweenEnd == 0){
+      tweenEnd =  new Random().nextInt(100) / 10 + 20;
+
     }
+
+    print(tweenEnd);
+
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
-    _animation = Tween(begin:-1.0, end: tweenEnd).animate(_animation);
+    _animation = Tween(begin:-1.0, end:tweenEnd).animate(_animation);
 
     return Container(
       width: queryData.size.width,
@@ -104,7 +104,7 @@ class _RouletteScreenState extends State<RouletteScreen>
           Container(
             color:Colors.green,
             child:DefaultTextWidget(
-                textContent: didWin != null ? 'You won!' : 'You lost',
+                textContent: isRedOnTween == true ? 'You won!' : 'You lost',
             )
           )
           // Transform(
