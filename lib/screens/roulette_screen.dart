@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:math';
 
 import '../widgets/roulette_item.dart';
 import '../models/default_text_class.dart';
+import '../providers/available_money.dart';
 
 class RouletteScreen extends StatefulWidget {
   RouletteScreen({Key key}) : super(key:key);
@@ -21,6 +23,7 @@ class _RouletteScreenState extends State<RouletteScreen>
   Animation _animation;
   AnimationController _animationController;
 
+
   bool didWin;
   bool didEnd;
   bool didStart = false;
@@ -28,7 +31,7 @@ class _RouletteScreenState extends State<RouletteScreen>
   possibleBets userBet;
   String moneyInvested;
 
-  void _roll() {
+  void _roll(Money moneyProvider) {
     tweenEnd = 0;
     didStart = true;
     isRedOnTween = null;
@@ -49,6 +52,16 @@ class _RouletteScreenState extends State<RouletteScreen>
               ? isRedOnTween = true
               : isRedOnTween = false;
          (((isRedOnTween == true) && (userBet == possibleBets.Red)) || ((isRedOnTween == false) && (userBet == possibleBets.Black))) == true ? didWin = true : didWin = false;
+         int convertedMoney = int.parse(moneyInvested);
+         if(didWin) {
+           convertedMoney *= 2;
+           moneyProvider.addMoney(convertedMoney);
+           convertedMoney = 0;
+           moneyInvested = convertedMoney.toString();
+         } else {
+           convertedMoney = 0;
+           moneyInvested = convertedMoney.toString();
+         }
         });
       } else {
         _animationController.isDismissed
@@ -83,9 +96,11 @@ class _RouletteScreenState extends State<RouletteScreen>
     });
   }
 
-  void investMoney(val) {
+  void investMoney(val,Money userMoney) {
     setState(() {
       moneyInvested = val;
+      int convMoney = int.parse(val);
+      userMoney.removeMoney(convMoney);
     });
   }
 
@@ -94,6 +109,8 @@ class _RouletteScreenState extends State<RouletteScreen>
 
   @override
   Widget build(BuildContext context) {
+    Money userMoney = Provider.of<Money>(context);
+
     final _formKey = GlobalKey<FormState>();
 
     MediaQueryData queryData = MediaQuery.of(context);
@@ -111,110 +128,115 @@ class _RouletteScreenState extends State<RouletteScreen>
       width: queryData.size.width,
       height: queryData.size.height,
       child: Center(
-          child: Column(
-        children: <Widget>[
-          RotationTransition(
-            turns: _animation,
-            child: Container(
-                width: queryData.size.width * 0.5,
-                height: queryData.size.height * 0.3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100.00),
-                ),
-                child: Row(
-                  children: <Widget>[
-                    RouletteItem(
-                      'X2',
-                      Colors.black,
-                      BorderRadius.only(
-                          topLeft: Radius.circular(100),
-                          bottomLeft: Radius.circular(100)),
-                    ),
-                    RouletteItem(
-                      'X2',
-                      Colors.red,
-                      BorderRadius.only(
-                          topRight: Radius.circular(100),
-                          bottomRight: Radius.circular(100)),
-                    ),
-                  ],
-                )),
-          ),
-          InkWell(
-              onTap: _roll,
-              child: Container(
-                child: Text("tap"),
-              )),
-          Container(
-            color: Colors.green,
-            child: DefaultTextWidget(
-              textContent: didWin == null
-                  ? didStart
-                      ? 'You...'
-                      : 'Try your chances!'
-                  : didWin
-                      ? 'You won!'
-                      : 'You lost'
-            ),
-          ),
-          InkWell(
-            onTap:() {
-              betBlack(); _roll();
-            },
-            child:DefaultTextWidget(
-              textContent:'Bet on black',
-            ),
-          ),
-          InkWell(
-            onTap:() {
-              betRed(); _roll();
-            },
-            child:DefaultTextWidget(
-              textContent:'Bet on red',
-            ),
-          ),
-          Form(
-            key:_formKey,
+          child: SingleChildScrollView(
             child: Column(
-              children:<Widget> [
-                TextFormField(
-                  decoration: const InputDecoration(
-                      hintText: 'How much do you want to bet?'
+        children: <Widget>[
+            RotationTransition(
+              turns: _animation,
+              child: Container(
+                  width: queryData.size.width * 0.5,
+                  height: queryData.size.height * 0.3,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100.00),
                   ),
-                  validator: (value) {
-                    if(value.isEmpty){
-                      return 'Please enter money amount first';
-                    }
-                    investMoney(value);
-                    return 'You just invested $value\$. You can now bet it!';
-                  },
+                  child: Row(
+                    children: <Widget>[
+                      RouletteItem(
+                        'X2',
+                        Colors.black,
+                        BorderRadius.only(
+                            topLeft: Radius.circular(100),
+                            bottomLeft: Radius.circular(100)),
+                      ),
+                      RouletteItem(
+                        'X2',
+                        Colors.red,
+                        BorderRadius.only(
+                            topRight: Radius.circular(100),
+                            bottomRight: Radius.circular(100)),
+                      ),
+                    ],
+                  )),
+            ),
+            Container(
+              color: Colors.green,
+              child: DefaultTextWidget(
+                textContent: didWin == null
+                    ? didStart
+                        ? 'You...'
+                        : 'Try your chances!'
+                    : didWin
+                        ? 'You won!'
+                        : 'You lost'
+              ),
+            ),
+            InkWell(
+              onTap:() {
+                betBlack(); _roll(userMoney);
+              },
+              child:DefaultTextWidget(
+                textContent:'Bet on black',
+              ),
+            ),
+            InkWell(
+              onTap:() {
+                betRed(); _roll(userMoney);
+              },
+              child:DefaultTextWidget(
+                textContent:'Bet on red',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom:0.0),
+              child: Form(
+                key:_formKey,
+                child: Column(
+                  children:<Widget> [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          hintText: 'How much do you want to bet?'
+                      ),
+                      validator: (value) {
+                        if(value.isEmpty){
+                          return 'Please enter money amount first';
+                        }
+                        investMoney(value,userMoney);
+                        return 'You just invested $value\$. You can now bet it!';
+                      },
+                    ),
+                    ElevatedButton(
+                      onPressed: (){
+                        if(_formKey.currentState.validate()){
+                          investMoney(moneyInvested,userMoney);
+                        }
+                      },
+                      child: Text("Submit"),
+                    )
+                  ],
                 ),
-                ElevatedButton(
-                  onPressed: (){
-                    if(_formKey.currentState.validate()){
-                      investMoney(moneyInvested);
-                    }
-                  },
-                  child: Text("Submit"),
-                )
-              ],
+              ),
             ),
-          ),
-          Container(
-            child: DefaultTextWidget(
-              textContent: moneyInvested == null ? 'Your money deposit is empty' : 'You have $moneyInvested\$ in deposit'
+            Container(
+              child: DefaultTextWidget(
+                textContent: moneyInvested == null ? 'Your money deposit is empty' : 'You have $moneyInvested\$ in deposit'
+              ),
             ),
-          )
+            Container(
+              child:DefaultTextWidget(
+                textContent: 'You have ${userMoney.quantity}\$ total',
+              )
+            )
 
-          // Transform(
-          //   alignment: FractionalOffset(0.5,0.0),
-          //   transform: Matrix4.rotationZ(_animation.value),
-          //   child: Container(
-          //     child:Text("!!!!!!!"),
-          //   ),
-          // )
+            // Transform(
+            //   alignment: FractionalOffset(0.5,0.0),
+            //   transform: Matrix4.rotationZ(_animation.value),
+            //   child: Container(
+            //     child:Text("!!!!!!!"),
+            //   ),
+            // )
         ],
-      )),
+      ),
+          )),
     );
   }
 }

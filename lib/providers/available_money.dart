@@ -17,4 +17,12 @@ class Money with ChangeNotifier {
     moneyType.index == 0 ? money -= 15 : moneyType.index == 1 ? money  += 5 : money += 1;
     notifyListeners();
   }
+
+  void addMoney(int moneyAmount){
+    money += moneyAmount;
+  }
+
+  void removeMoney(int moneyAmount){
+    money -= moneyAmount;
+  }
 }
