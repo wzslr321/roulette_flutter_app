@@ -18,20 +18,28 @@ class _RouletteScreenState extends State<RouletteScreen>
 
   bool didWin;
   bool didEnd;
-  bool isRedOnTween = false;
-
+  bool didStart = false;
+  bool isRedOnTween;
 
   void _roll() {
     tweenEnd = 0;
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 10), value: 0.1, lowerBound: 0.0, upperBound:1.0, );
+    didStart = true;
+    isRedOnTween = null;
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+      value: 0.1,
+      lowerBound: 0.0,
+      upperBound: 1.0,
+    );
     _animationController.addListener(() {
-      if(_animationController.isCompleted){
+      if (_animationController.isCompleted) {
         _animationController.forward();
         setState(() {
           String _convertedTween = tweenEnd.toString();
-          int.parse(_convertedTween[3])  < 5 ? isRedOnTween = true : isRedOnTween = false;
-          print(_convertedTween[3]);
+          int.parse(_convertedTween[3]) < 5
+              ? isRedOnTween = true
+              : isRedOnTween = false;
         });
       } else {
         _animationController.isDismissed
@@ -43,16 +51,14 @@ class _RouletteScreenState extends State<RouletteScreen>
     _animationController.forward();
   }
 
-
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(vsync: this);
-
   }
 
   @override
-  dispose(){
+  dispose() {
     super.dispose();
     _animationController.dispose();
   }
@@ -63,16 +69,13 @@ class _RouletteScreenState extends State<RouletteScreen>
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
 
-    if(tweenEnd == 0){
-      tweenEnd =  new Random().nextInt(100) / 10 + 20;
-
+    if (tweenEnd == 0) {
+      tweenEnd = new Random().nextInt(100) / 10 + 20;
     }
-
-    print(tweenEnd);
 
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
-    _animation = Tween(begin:-1.0, end:tweenEnd).animate(_animation);
+    _animation = Tween(begin: -1.0, end: tweenEnd).animate(_animation);
 
     return Container(
       width: queryData.size.width,
@@ -81,7 +84,7 @@ class _RouletteScreenState extends State<RouletteScreen>
           child: Column(
         children: <Widget>[
           RotationTransition(
-            turns:_animation,
+            turns: _animation,
             child: Container(
                 width: queryData.size.width * 0.5,
                 height: queryData.size.height * 0.3,
@@ -90,23 +93,39 @@ class _RouletteScreenState extends State<RouletteScreen>
                 ),
                 child: Row(
                   children: <Widget>[
-                    RouletteItem('X2', Colors.black, BorderRadius.only(topLeft:Radius.circular(100),bottomLeft:Radius.circular(100)),),
-                    RouletteItem('X2', Colors.red, BorderRadius.only(topRight:Radius.circular(100),bottomRight:Radius.circular(100)),),
+                    RouletteItem(
+                      'X2',
+                      Colors.black,
+                      BorderRadius.only(
+                          topLeft: Radius.circular(100),
+                          bottomLeft: Radius.circular(100)),
+                    ),
+                    RouletteItem(
+                      'X2',
+                      Colors.red,
+                      BorderRadius.only(
+                          topRight: Radius.circular(100),
+                          bottomRight: Radius.circular(100)),
+                    ),
                   ],
                 )),
           ),
           InkWell(
-            onTap:_roll,
-            child:Container(
-              child: Text("tap"),
-            )
-          ),
+              onTap: _roll,
+              child: Container(
+                child: Text("tap"),
+              )),
           Container(
-            color:Colors.green,
-            child:DefaultTextWidget(
-                textContent: isRedOnTween == true ? 'You won!' : 'You lost',
-            )
-          )
+              color: Colors.green,
+              child: DefaultTextWidget(
+                textContent: isRedOnTween == null
+                    ? didStart
+                        ? 'You...'
+                        : 'Try your chances!'
+                    : isRedOnTween
+                        ? 'You lost'
+                        : 'You won!',
+              )),
           // Transform(
           //   alignment: FractionalOffset(0.5,0.0),
           //   transform: Matrix4.rotationZ(_animation.value),
