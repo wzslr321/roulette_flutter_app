@@ -17,7 +17,7 @@ class _RouletteScreenState extends State<RouletteScreen>
 
   void _roll() {
     _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1), value: 0.5, lowerBound: 0.25, upperBound: 1.0);
+        AnimationController(vsync: this, duration: const Duration(seconds: 10), value: 0.0, lowerBound: 0.0, upperBound:1.0);
     _animationController.addListener(() {
       _animationController.isCompleted
           ? _animationController.forward()
@@ -33,17 +33,8 @@ class _RouletteScreenState extends State<RouletteScreen>
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1), value: 0.25, lowerBound: 0.25, upperBound: 0.5);
-    _animationController.addListener(() {
-      _animationController.isCompleted
-          ? _animationController.forward()
-          : _animationController.isDismissed
-              ? _animationController.forward()
-              : setState(() {});
-    });
+    _animationController = AnimationController(vsync: this);
 
-    _animationController.forward();
   }
 
   @override
