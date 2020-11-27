@@ -10,6 +10,10 @@ class RouletteScreen extends StatefulWidget {
   @override
   _RouletteScreenState createState() => _RouletteScreenState();
 }
+enum possibleBets{
+  Black,
+  Red,
+}
 
 class _RouletteScreenState extends State<RouletteScreen>
     with TickerProviderStateMixin {
@@ -20,11 +24,13 @@ class _RouletteScreenState extends State<RouletteScreen>
   bool didEnd;
   bool didStart = false;
   bool isRedOnTween;
+  possibleBets userBet;
 
   void _roll() {
     tweenEnd = 0;
     didStart = true;
     isRedOnTween = null;
+    didWin = null;
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 10),
@@ -40,6 +46,7 @@ class _RouletteScreenState extends State<RouletteScreen>
           int.parse(_convertedTween[3]) < 5
               ? isRedOnTween = true
               : isRedOnTween = false;
+         (((isRedOnTween == true) && (userBet == possibleBets.Red)) || ((isRedOnTween == false) && (userBet == possibleBets.Black))) == true ? didWin = true : didWin = false;
         });
       } else {
         _animationController.isDismissed
@@ -63,6 +70,17 @@ class _RouletteScreenState extends State<RouletteScreen>
     _animationController.dispose();
   }
 
+  void betRed() {
+    setState(() {
+      userBet = possibleBets.Red;
+    });
+  }
+  void betBlack() {
+    setState(() {
+      userBet = possibleBets.Black;
+    });
+  }
+
   double tweenEnd = 0;
 
   @override
@@ -72,7 +90,6 @@ class _RouletteScreenState extends State<RouletteScreen>
     if (tweenEnd == 0) {
       tweenEnd = new Random().nextInt(100) / 10 + 20;
     }
-
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animation = Tween(begin: -1.0, end: tweenEnd).animate(_animation);
@@ -116,16 +133,33 @@ class _RouletteScreenState extends State<RouletteScreen>
                 child: Text("tap"),
               )),
           Container(
-              color: Colors.green,
-              child: DefaultTextWidget(
-                textContent: isRedOnTween == null
-                    ? didStart
-                        ? 'You...'
-                        : 'Try your chances!'
-                    : isRedOnTween
-                        ? 'You lost'
-                        : 'You won!',
-              )),
+            color: Colors.green,
+            child: DefaultTextWidget(
+              textContent: didWin == null
+                  ? didStart
+                      ? 'You...'
+                      : 'Try your chances!'
+                  : didWin
+                      ? 'You won!'
+                      : 'You lost'
+            ),
+          ),
+          InkWell(
+            onTap:() {
+              betBlack(); _roll();
+            },
+            child:DefaultTextWidget(
+              textContent:'Bet on black',
+            ),
+          ),
+          InkWell(
+            onTap:() {
+              betRed(); _roll();
+            },
+            child:DefaultTextWidget(
+              textContent:'Bet on red',
+            ),
+          )
           // Transform(
           //   alignment: FractionalOffset(0.5,0.0),
           //   transform: Matrix4.rotationZ(_animation.value),
