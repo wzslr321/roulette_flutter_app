@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RouletteState with ChangeNotifier{
-  bool didStart;
+  bool didStart = false;
   bool didEnd;
-  double tweenVal;
+  double tweenVal = 0.0;
 
   double get tweenValue{
     return tweenVal;

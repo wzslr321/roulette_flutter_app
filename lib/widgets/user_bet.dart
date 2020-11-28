@@ -18,7 +18,6 @@ class _UserBetState extends State<UserBet> {
 
     UsersBet _usersBet = Provider.of<UsersBet>(context);
 
-    print(_usersBet);
 
     return Consumer<InvestedMoney>(
       builder: (_,money,__){

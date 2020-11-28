@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_helper/models/default_text_class.dart';
 import 'dart:math';
+import 'package:provider/provider.dart';
 
 import '../widgets/roulette_item.dart';
+import '../models/default_text_class.dart';
+import '../providers/roulette_state_provider.dart';
 
 class RouletteAnimation extends StatefulWidget {
-  static bool isActive = didStart;
-  static bool isFinished = didEnd;
-  static double tweenVal = tweenEnd;
 
   @override
   RouletteAnimationState createState() => RouletteAnimationState();
 }
 
-bool didStart = false;
-bool didEnd = false;
-double tweenEnd = 0;
 
 class RouletteAnimationState extends State<RouletteAnimation>
     with TickerProviderStateMixin {
@@ -37,8 +33,8 @@ class RouletteAnimationState extends State<RouletteAnimation>
   }
 
   void roll() {
-    tweenEnd = 0;
-    didStart = true;
+    _globalRouletteState.setTweenVal(0.0);
+    _globalRouletteState.start();
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 10),
@@ -48,7 +44,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
     );
     _animationController.addListener(() {
       if (_animationController.isCompleted) {
-        didEnd = true;
+        _globalRouletteState.end();
         _animationController.forward();
       } else {
         _animationController.isDismissed
@@ -73,16 +69,25 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animationController.dispose();
   }
 
+  RouletteState _globalRouletteState;
+  double _tweenValue;
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
+    RouletteState _rouletteState = Provider.of<RouletteState>(context);
 
-    if (tweenEnd == 0) {
-      tweenEnd = new Random().nextInt(100) / 10 + 20;
+    _globalRouletteState = _rouletteState;
+
+    _tweenValue = _rouletteState.tweenVal;
+
+    if (_tweenValue == 0.0) {
+      double _randomDoubleVal = new Random().nextInt(100) / 10 + 20;
+      _rouletteState.setTweenVal(_randomDoubleVal);
     }
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
-    _animation = Tween(begin: -1.0, end: tweenEnd).animate(_animation);
+    _animation = Tween(begin: -1.0, end: _tweenValue).animate(_animation);
 
     _animationAlignment = CurvedAnimation(
         parent: _animationAlignmentController, curve: Curves.elasticInOut);
