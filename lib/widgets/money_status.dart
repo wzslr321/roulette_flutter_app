@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/default_text_class.dart';
-import '../providers/available_money.dart';
-import '../functions/invest_money.dart';
+import '../providers/available_money_provider.dart';
+import './invest_money.dart';
 
 class MoneyStatus extends StatefulWidget {
   @override
@@ -13,7 +13,6 @@ class MoneyStatus extends StatefulWidget {
 class _MoneyStatusState extends State<MoneyStatus> {
   @override
   Widget build(BuildContext context) {
-
     Money userMoney = Provider.of<Money>(context);
 
     int _moneyInvested = InvestMoney.investedMoney;
@@ -21,7 +20,7 @@ class _MoneyStatusState extends State<MoneyStatus> {
     print(_moneyInvested);
 
     return Column(
-      children:<Widget> [
+      children: <Widget>[
         Container(
           child: DefaultTextWidget(
               textContent: _moneyInvested == null
@@ -30,8 +29,8 @@ class _MoneyStatusState extends State<MoneyStatus> {
         ),
         Container(
             child: DefaultTextWidget(
-              textContent: 'You have ${userMoney.quantity}\$ total',
-            ))
+          textContent: 'You have ${userMoney.quantity}\$ total',
+        ))
       ],
     );
   }

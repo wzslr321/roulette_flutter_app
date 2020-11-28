@@ -5,7 +5,6 @@ import 'dart:math';
 import '../widgets/roulette_item.dart';
 
 class RouletteAnimation extends StatefulWidget {
-
   static bool isActive = didStart;
   static bool isFinished = didEnd;
   static double tweenVal = tweenEnd;
@@ -20,7 +19,6 @@ double tweenEnd = 0;
 
 class RouletteAnimationState extends State<RouletteAnimation>
     with TickerProviderStateMixin {
-
   Animation _animation;
   AnimationController _animationController;
 
@@ -77,20 +75,22 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   @override
   Widget build(BuildContext context) {
-
     MediaQueryData queryData = MediaQuery.of(context);
 
     if (tweenEnd == 0) {
       tweenEnd = new Random().nextInt(100) / 10 + 20;
     }
-    _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
+    _animation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animation = Tween(begin: -1.0, end: tweenEnd).animate(_animation);
 
-    _animationAlignment = CurvedAnimation(parent: _animationAlignmentController, curve: Curves.elasticInOut);
-    _animationAlignment = Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
+    _animationAlignment = CurvedAnimation(
+        parent: _animationAlignmentController, curve: Curves.elasticInOut);
+    _animationAlignment =
+        Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
 
     return Column(
-      children:<Widget> [
+      children: <Widget>[
         Transform(
           alignment: FractionalOffset(2.0, 0.0),
           transform: Matrix4.rotationZ(_animationAlignment.value),
@@ -102,37 +102,36 @@ class RouletteAnimationState extends State<RouletteAnimation>
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100.00),
                 ),
-                child:
-                    Row(
-                      children: <Widget>[
-                        RouletteItem(
-                          'X2',
-                          Colors.black,
-                          BorderRadius.only(
-                              topLeft: Radius.circular(100),
-                              bottomLeft: Radius.circular(100)),
-                        ),
-                        RouletteItem(
-                          'X2',
-                          Colors.red,
-                          BorderRadius.only(
-                              topRight: Radius.circular(100),
-                              bottomRight: Radius.circular(100)),
-                        ),
-                      ],
+                child: Row(
+                  children: <Widget>[
+                    RouletteItem(
+                      'X2',
+                      Colors.black,
+                      BorderRadius.only(
+                          topLeft: Radius.circular(100),
+                          bottomLeft: Radius.circular(100)),
+                    ),
+                    RouletteItem(
+                      'X2',
+                      Colors.red,
+                      BorderRadius.only(
+                          topRight: Radius.circular(100),
+                          bottomRight: Radius.circular(100)),
+                    ),
+                  ],
                 )),
           ),
         ),
         Container(
           width: 100,
           child: ElevatedButton(
-              onPressed:() {
-                 roll();alignmentAnimate();
+              onPressed: () {
+                roll();
+                alignmentAnimate();
               },
               child: DefaultTextWidget(
                 textContent: 'Roll!',
-              )
-          ),
+              )),
         )
       ],
     );

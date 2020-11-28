@@ -5,7 +5,7 @@ import 'dart:math';
 import '../widgets/games_appbar.dart';
 import '../models/default_text_class.dart';
 import '../models/gradient_button_class.dart';
-import '../providers/available_money.dart';
+import '../providers/available_money_provider.dart';
 import '../widgets/reflex_menu_info.dart';
 
 class ReflexGameScreen extends StatefulWidget {
@@ -33,11 +33,12 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
     Money _userMoney = Provider.of<Money>(context);
 
     void onDotTap() => {
-
           setState(() {
             _timeDotTapMs = DateTime.now().millisecond;
             _timeDotTapS = DateTime.now().second;
-            ((_timeDotTapMs - _timeDotRenderMs) < 1 &&  (_timeDotTapS - _timeDotRenderS) == 0) ||  (_timeDotTapS - _timeDotRenderS) < 2
+            ((_timeDotTapMs - _timeDotRenderMs) < 1 &&
+                        (_timeDotTapS - _timeDotRenderS) == 0) ||
+                    (_timeDotTapS - _timeDotRenderS) < 2
                 ? _isLess = false
                 : _isLess = true;
             _timeDotRenderMs = DateTime.now().millisecond;
@@ -46,7 +47,6 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
                 ? _userMoney.addLot(moneyQuality.Bronze)
                 : _userMoney.addLot(moneyQuality.Gold);
           }),
-
         };
 
     void _startGame() {

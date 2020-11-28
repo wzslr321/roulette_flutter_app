@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class DefaultTextWidget extends StatelessWidget {
-
   final String textContent;
   final FontWeight fontWeight;
   final double fontSize;

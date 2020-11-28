@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/available_money.dart';
+import '../providers/available_money_provider.dart';
 import '../models/default_text_class.dart';
 
 class GameAppBar extends StatelessWidget {

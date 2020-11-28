@@ -18,7 +18,8 @@ class MenuScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: <Widget>[
-          HeaderInformation(constraints, queryData, 0.275, 'Choose what type of game You want to play!'),
+          HeaderInformation(constraints, queryData, 0.275,
+              'Choose what type of game You want to play!'),
           Container(
             height: constraints.maxHeight * 0.4,
             decoration: BoxDecoration(

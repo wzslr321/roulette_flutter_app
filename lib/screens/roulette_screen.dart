@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../functions/roulette_animations.dart';
-import '../functions/user_bet.dart';
-import '../functions/invest_money.dart';
-import '../functions/roulette_result_check.dart';
-import '../functions/money_status.dart';
+import '../widgets/roulette_animations.dart';
+import '../widgets/user_bet.dart';
+import '../widgets/invest_money.dart';
+import '../widgets/roulette_result_check.dart';
+import '../widgets/money_status.dart';
 
 class RouletteScreen extends StatefulWidget {
-
   static const routeName = '/roulette';
 
   @override
@@ -16,10 +15,8 @@ class RouletteScreen extends StatefulWidget {
 
 class _RouletteScreenState extends State<RouletteScreen>
     with TickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
-
     MediaQueryData queryData = MediaQuery.of(context);
 
     return Container(

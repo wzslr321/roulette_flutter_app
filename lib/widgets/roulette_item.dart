@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import '../models/default_text_class.dart';
 
 class RouletteItem extends StatelessWidget {
-
   final String text;
   final Color bgColor;
   final BorderRadius borderRadius;
 
-  RouletteItem(this.text,this.bgColor,this.borderRadius);
+  RouletteItem(this.text, this.bgColor, this.borderRadius);
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +15,16 @@ class RouletteItem extends StatelessWidget {
 
     return Expanded(
       child: Container(
-        height:queryData.size.height * 0.3,
+        height: queryData.size.height * 0.3,
         decoration: BoxDecoration(
           borderRadius: borderRadius,
           color: bgColor,
         ),
         child: Center(
           child: DefaultTextWidget(
-            textContent:text,
+            textContent: text,
             fontColor: Colors.white,
-            isFittedBox:false,
+            isFittedBox: false,
             fontSize: 30,
           ),
         ),

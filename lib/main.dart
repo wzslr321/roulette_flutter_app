@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './providers/available_money.dart';
+import './providers/available_money_provider.dart';
 import './providers/profile_level_provider.dart';
 
 import './screens/tabs_screen.dart';
@@ -13,7 +13,6 @@ import './screens/reflex_game_screen.dart';
 import './screens/page_not_found_screen.dart';
 
 void main() => runApp(MyApp());
-
 
 class MyApp extends StatelessWidget {
   @override

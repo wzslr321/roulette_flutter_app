@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/menu_and_profile_header.dart';
-import '../providers/available_money.dart';
+import '../providers/available_money_provider.dart';
 import '../models/default_text_class.dart';
 import '../providers/profile_level_provider.dart';
 import '../models/gradient_button_class.dart';
@@ -32,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) => Column(
-        children:<Widget>[
+        children: <Widget>[
           HeaderInformation(constraints, queryData, 0.25,
               'You can upgrade your profile with money!'),
           Card(
@@ -54,19 +54,21 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          _isAbleToLvlUp ?
-            GradientBorderButtonContainer(
-              onPressed:() {
-                userLevel.levelUp(); _takeMoney();
-              },
-              child: DefaultTextWidget(
-                textContent: 'Level Up!',
-              ),
-            ) : GradientBorderButtonContainer(
-            child: DefaultTextWidget(
-              textContent: 'Earn money first!',
-            ),
-          ),
+          _isAbleToLvlUp
+              ? GradientBorderButtonContainer(
+                  onPressed: () {
+                    userLevel.levelUp();
+                    _takeMoney();
+                  },
+                  child: DefaultTextWidget(
+                    textContent: 'Level Up!',
+                  ),
+                )
+              : GradientBorderButtonContainer(
+                  child: DefaultTextWidget(
+                    textContent: 'Earn money first!',
+                  ),
+                ),
           HeaderInformation(constraints, queryData, 0.25,
               'You have ${userLevel.level} level '),
         ],

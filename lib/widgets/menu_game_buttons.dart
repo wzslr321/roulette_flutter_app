@@ -11,7 +11,6 @@ class GameButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final MediaQueryData queryData = MediaQuery.of(context);
 
     return GradientBorderButtonContainer(

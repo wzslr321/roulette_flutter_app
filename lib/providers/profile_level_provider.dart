@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProfileLevel with ChangeNotifier{
+class ProfileLevel with ChangeNotifier {
   int level = 1;
-  int moneyForLvl= 10;
+  int moneyForLvl = 10;
 
-  int get showLevel{
+  int get showLevel {
     return level;
   }
 
-  int get moneyNeeded{
+  int get moneyNeeded {
     return moneyForLvl * level;
   }
 

@@ -18,7 +18,6 @@ enum possibleBets {
 possibleBets userBet;
 
 class _UserBetState extends State<UserBet> {
-
   void betRed() {
     setState(() {
       userBet = possibleBets.Red;
@@ -35,26 +34,27 @@ class _UserBetState extends State<UserBet> {
 
   @override
   Widget build(BuildContext context) {
-
-    return (_moneyInvested != 0 && moneyInvested != null) ? Row(
-          children:<Widget> [
-            InkWell(
-              onTap:betBlack,
-              child: DefaultTextWidget(
-                textContent: 'Bet on black',
+    return (_moneyInvested != 0 && moneyInvested != null)
+        ? Row(
+            children: <Widget>[
+              InkWell(
+                onTap: betBlack,
+                child: DefaultTextWidget(
+                  textContent: 'Bet on black',
+                ),
               ),
-            ),
-            InkWell(
-              onTap:betRed,
-              child: DefaultTextWidget(
-                textContent: 'Bet on red',
+              InkWell(
+                onTap: betRed,
+                child: DefaultTextWidget(
+                  textContent: 'Bet on red',
+                ),
               ),
+            ],
+          )
+        : Container(
+            child: DefaultTextWidget(
+              textContent: 'Deposit money to bet!',
             ),
-          ],
-        ) : Container(
-          child: DefaultTextWidget(
-            textContent: 'Deposit money to bet!',
-          ),
-    );
+          );
   }
 }
