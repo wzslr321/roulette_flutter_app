@@ -37,7 +37,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
           setState(() {
             _timeDotTapMs = DateTime.now().millisecond;
             _timeDotTapS = DateTime.now().second;
-            ((_timeDotTapMs - _timeDotRenderMs) < 1 &&  (_timeDotTapS - _timeDotRenderS) == 0) || ((_timeDotTapMs - _timeDotRenderMs) > 1 && (_timeDotTapS - _timeDotRenderS) == 1)
+            ((_timeDotTapMs - _timeDotRenderMs) < 1 &&  (_timeDotTapS - _timeDotRenderS) == 0) ||  (_timeDotTapS - _timeDotRenderS) < 2
                 ? _isLess = false
                 : _isLess = true;
             _timeDotRenderMs = DateTime.now().millisecond;
