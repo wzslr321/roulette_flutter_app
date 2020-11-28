@@ -20,14 +20,14 @@ class _InvestMoneyState extends State<InvestMoney> {
 
   void investMoney(val, Money userMoney) {
     setState(() {
-      moneyInvested = val;
-      int convMoney = int.parse(val);
-      userMoney.removeMoney(convMoney);
+      userMoney.removeMoney(moneyInvested);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    print(moneyInvested);
 
     final _formKey = GlobalKey<FormState>();
     Money userMoney = Provider.of<Money>(context);

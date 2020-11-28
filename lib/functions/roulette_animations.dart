@@ -78,9 +78,6 @@ class RouletteAnimationState extends State<RouletteAnimation>
   @override
   Widget build(BuildContext context) {
 
-    print(didStart);
-    print(tweenEnd);
-
     MediaQueryData queryData = MediaQuery.of(context);
 
     if (tweenEnd == 0) {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../models/default_text_class.dart';
-import './invest_money.dart';
+import 'user_bet.dart';
 import 'roulette_animations.dart';
 
-class BetOnRoulette extends StatefulWidget {
+class RouletteResult extends StatefulWidget {
   @override
-  _BetOnRouletteState createState() => _BetOnRouletteState();
+  _RouletteResult createState() => _RouletteResult();
 }
 
 bool _didStart = RouletteAnimation.isActive;
@@ -21,13 +21,12 @@ bool didEndOnRed(){
 }
 
 bool didUserWin(){
-  if(_didEnd == true){
-
-  };
+    if((((didEndOnRed()) && (userBet == possibleBets.Red)) || ((didEndOnRed() == false) && (userBet == possibleBets.Black))))
+      return true;
+    return false;
 }
-bool _didWin;
 
-class _BetOnRouletteState extends State<BetOnRoulette> {
+class _RouletteResult extends State<RouletteResult> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,11 +34,11 @@ class _BetOnRouletteState extends State<BetOnRoulette> {
         Container(
           color: Colors.green,
           child: DefaultTextWidget(
-              textContent: _didWin == null
-                  ? _didStart
+              textContent: _didStart == false
+                  ? 'Try your chances!'
+                  : _didEnd == false
                   ? 'You...'
-                  : 'Try your chances!'
-                  : _didWin
+                  : () => didUserWin()
                   ? 'You won!'
                   : 'You lost'),
         ),

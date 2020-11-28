@@ -4,6 +4,8 @@ import 'invest_money.dart';
 import '../models/default_text_class.dart';
 
 class UserBet extends StatefulWidget {
+  static possibleBets usersBet = userBet;
+
   @override
   _UserBetState createState() => _UserBetState();
 }
