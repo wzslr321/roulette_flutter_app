@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../models/page_view_physics.dart';
 
 class ScrollableMenu extends StatelessWidget {
   final List<Widget> scrollableItems;
@@ -26,7 +25,6 @@ class ScrollableMenu extends StatelessWidget {
     return ListView.builder(
       clipBehavior: Clip.antiAlias,
       scrollDirection: Axis.horizontal,
-      physics: CustomScrollPhysics(itemDimension: 100),
       itemCount: itemCount,
       itemBuilder: (context, index) {
         return Container(

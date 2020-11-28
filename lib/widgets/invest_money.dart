@@ -3,28 +3,29 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/available_money_provider.dart';
+import '../providers/invested_money_provider.dart';
 
 class InvestMoney extends StatefulWidget {
   InvestMoney({Key key}) : super(key: key);
-
-  static final investedMoney = moneyInvested;
 
   @override
   _InvestMoneyState createState() => _InvestMoneyState();
 }
 
-int moneyInvested;
+int _moneyInvested;
 
 class _InvestMoneyState extends State<InvestMoney> {
+
   void investMoney(val, Money userMoney) {
     setState(() {
-      userMoney.removeMoney(moneyInvested);
+      userMoney.removeMoney(_moneyInvested);
+      InvestedMoney().investMoney(_moneyInvested);
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
-    print(moneyInvested);
 
     final _formKey = GlobalKey<FormState>();
     Money userMoney = Provider.of<Money>(context);
@@ -44,14 +45,14 @@ class _InvestMoneyState extends State<InvestMoney> {
               if (value.isEmpty) {
                 return 'Please enter money amount first';
               }
-              moneyInvested = int.parse(value);
+              _moneyInvested = int.parse(value);
               return null;
             },
           ),
           ElevatedButton(
             onPressed: () {
               if (_formKey.currentState.validate()) {
-                investMoney(moneyInvested, userMoney);
+                investMoney(_moneyInvested, userMoney);
               }
             },
             child: Text("Submit"),

@@ -13,7 +13,7 @@ class Money with ChangeNotifier {
     return money;
   }
 
-  void addLot(moneyQuality moneyType) {
+  void addGameMoney(moneyQuality moneyType) {
     moneyType.index == 0
         ? money -= 15
         : moneyType.index == 1

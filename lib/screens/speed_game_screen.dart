@@ -14,7 +14,7 @@ class SpeedGameScreen extends StatelessWidget {
     Money userMoney = Provider.of<Money>(context);
 
     void _incrementMoney() {
-      userMoney.addLot(moneyQuality.Grey);
+      userMoney.addGameMoney(moneyQuality.Grey);
     }
 
     return GameAppBar(LayoutBuilder(

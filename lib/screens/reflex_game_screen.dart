@@ -44,8 +44,8 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
             _timeDotRenderMs = DateTime.now().millisecond;
             _timeDotRenderS = DateTime.now().second;
             _isLess == true
-                ? _userMoney.addLot(moneyQuality.Bronze)
-                : _userMoney.addLot(moneyQuality.Gold);
+                ? _userMoney.addGameMoney(moneyQuality.Bronze)
+                : _userMoney.addGameMoney(moneyQuality.Gold);
           }),
         };
 

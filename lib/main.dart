@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 
 import './providers/available_money_provider.dart';
 import './providers/profile_level_provider.dart';
+import './providers/invested_money_provider.dart';
+import './providers/roulette_state_provider.dart';
+import './providers/user_bet_provider.dart';
 
 import './screens/tabs_screen.dart';
 import './screens/menu_screen.dart';
@@ -25,6 +28,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ProfileLevel(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => InvestedMoney(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RouletteState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserBet(),
+        )
       ],
       child: MaterialApp(
           title: "Money Maker",
