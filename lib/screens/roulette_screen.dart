@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 import '../functions/roulette_animations.dart';
 
 import '../models/default_text_class.dart';
 import '../providers/available_money.dart';
 
 class RouletteScreen extends StatefulWidget {
-  RouletteScreen({Key key}) : super(key: key);
+
   static const routeName = '/roulette';
 
   @override
@@ -54,8 +53,6 @@ class _RouletteScreenState extends State<RouletteScreen>
   Widget build(BuildContext context) {
     Money userMoney = Provider.of<Money>(context);
 
-    final _formKey = GlobalKey<FormState>();
-
     MediaQueryData queryData = MediaQuery.of(context);
 
     return Container(
@@ -66,39 +63,6 @@ class _RouletteScreenState extends State<RouletteScreen>
         child: Column(
           children: [
             RouletteAnimation(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 0.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      decoration: const InputDecoration(
-                          hintText: 'How much do you want to bet?'),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter money amount first';
-                        }
-                        moneyInvested = value;
-                        return null;
-                      },
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          investMoney(moneyInvested, userMoney);
-                        }
-                      },
-                      child: Text("Submit"),
-                    )
-                  ],
-                ),
-              ),
-            ),
             Container(
               child: DefaultTextWidget(
                   textContent: moneyInvested == null
