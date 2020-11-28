@@ -16,19 +16,13 @@ int _moneyInvested;
 
 class _InvestMoneyState extends State<InvestMoney> {
 
-  void investMoney(val, Money userMoney) {
-    setState(() {
-      userMoney.removeMoney(_moneyInvested);
-      InvestedMoney().investMoney(_moneyInvested);
-    });
-  }
-
-
   @override
   Widget build(BuildContext context) {
 
     final _formKey = GlobalKey<FormState>();
-    Money userMoney = Provider.of<Money>(context);
+    Money _userMoney = Provider.of<Money>(context);
+    InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
+
 
     return Form(
       key: _formKey,
@@ -52,7 +46,8 @@ class _InvestMoneyState extends State<InvestMoney> {
           ElevatedButton(
             onPressed: () {
               if (_formKey.currentState.validate()) {
-                investMoney(_moneyInvested, userMoney);
+                _userMoney.removeMoney(_moneyInvested);
+                _investedMoney.investMoney(_moneyInvested);
               }
             },
             child: Text("Submit"),

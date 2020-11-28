@@ -21,7 +21,7 @@ class _MoneyStatusState extends State<MoneyStatus> {
           return DefaultTextWidget(
               textContent: money == null
                   ? 'Your money deposit is empty'
-                  : 'You have $money\$ in deposit');
+                  : 'You have ${money.investedMoney}\$ in deposit');
         })),
         Container(
             child: DefaultTextWidget(

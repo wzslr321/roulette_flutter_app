@@ -9,7 +9,7 @@ class UsersBet with ChangeNotifier{
 
   possibleBets userBet;
 
-  possibleBets get usersBet{
+  possibleBets get bet{
     return userBet;
   }
 

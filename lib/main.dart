@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           create: (_) => RouletteState(),
         ),
         ChangeNotifierProvider(
-          create: (_) => UserBet(),
+          create: (_) => UsersBet(),
         )
       ],
       child: MaterialApp(

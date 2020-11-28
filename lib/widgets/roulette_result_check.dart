@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/default_text_class.dart';
-import 'user_bet.dart';
+import '../providers/user_bet_provider.dart';
 import 'roulette_animations.dart';
 
 class RouletteResult extends StatefulWidget {
@@ -19,16 +20,20 @@ bool didEndOnRed() {
   return false;
 }
 
-bool didUserWin() {
-  if ((((didEndOnRed()) && (userBet == possibleBets.Red)) ||
-      ((didEndOnRed() == false) && (userBet == possibleBets.Black))))
-    return true;
-  return false;
-}
+
 
 class _RouletteResult extends State<RouletteResult> {
   @override
   Widget build(BuildContext context) {
+    UsersBet _usersBet = Provider.of<UsersBet>(context);
+
+    bool didUserWin() {
+      if ((((didEndOnRed()) && (_usersBet.bet == possibleBets.Red)) ||
+          ((didEndOnRed() == false) && (_usersBet.bet == possibleBets.Black))))
+        return true;
+      return false;
+    }
+
     return Column(
       children: <Widget>[
         Container(
