@@ -45,7 +45,6 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animationController.addListener(() {
       if (_animationController.isCompleted) {
         _globalRouletteState.end();
-        _animationController.forward();
       } else {
         _animationController.isDismissed
             ? _animationController.forward()
@@ -74,71 +73,73 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData queryData = MediaQuery.of(context);
-    RouletteState _rouletteState = Provider.of<RouletteState>(context);
-
-    _globalRouletteState = _rouletteState;
-
-    _tweenValue = _rouletteState.tweenVal;
-
-    if (_tweenValue == 0.0) {
-      double _randomDoubleVal = new Random().nextInt(100) / 10 + 20;
-      _rouletteState.setTweenVal(_randomDoubleVal);
-    }
-    _animation =
-        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
-    _animation = Tween(begin: -1.0, end: _tweenValue).animate(_animation);
-
-    _animationAlignment = CurvedAnimation(
-        parent: _animationAlignmentController, curve: Curves.elasticInOut);
-    _animationAlignment =
-        Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
-
-    return Column(
-      children: <Widget>[
-        Transform(
-          alignment: FractionalOffset(2.0, 0.0),
-          transform: Matrix4.rotationZ(_animationAlignment.value),
-          child: RotationTransition(
-            turns: _animation,
-            child: Container(
-                width: queryData.size.width * 0.5,
-                height: queryData.size.height * 0.3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100.00),
-                ),
-                child: Row(
-                  children: <Widget>[
-                    RouletteItem(
-                      'X2',
-                      Colors.black,
-                      BorderRadius.only(
-                          topLeft: Radius.circular(100),
-                          bottomLeft: Radius.circular(100)),
-                    ),
-                    RouletteItem(
-                      'X2',
-                      Colors.red,
-                      BorderRadius.only(
-                          topRight: Radius.circular(100),
-                          bottomRight: Radius.circular(100)),
-                    ),
-                  ],
-                )),
-          ),
-        ),
-        Container(
-          width: 100,
-          child: ElevatedButton(
-              onPressed: () {
-                roll();
-                alignmentAnimate();
-              },
-              child: DefaultTextWidget(
-                textContent: 'Roll!',
-              )),
-        )
-      ],
-    );
+    return Text("Really weird");
   }
+  //   MediaQueryData queryData = MediaQuery.of(context);
+  //   RouletteState _rouletteState = Provider.of<RouletteState>(context);
+  //
+  //   _globalRouletteState = _rouletteState;
+  //
+  //   _tweenValue = _rouletteState.tweenValue;
+  //
+  //   if (_tweenValue == 0.0) {
+  //     double _randomDoubleVal = new Random().nextInt(100) / 10 + 20;
+  //     _rouletteState.setTweenVal(_randomDoubleVal);
+  //   }
+  //   _animation =
+  //       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
+  //   _animation = Tween(begin: -1.0, end: _tweenValue).animate(_animation);
+  //
+  //   _animationAlignment = CurvedAnimation(
+  //       parent: _animationAlignmentController, curve: Curves.elasticInOut);
+  //   _animationAlignment =
+  //       Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
+  //
+  //   return Column(
+  //     children: <Widget>[
+  //       Transform(
+  //         alignment: FractionalOffset(2.0, 0.0),
+  //         transform: Matrix4.rotationZ(_animationAlignment.value),
+  //         child: RotationTransition(
+  //           turns: _animation,
+  //           child: Container(
+  //               width: queryData.size.width * 0.5,
+  //               height: queryData.size.height * 0.3,
+  //               decoration: BoxDecoration(
+  //                 borderRadius: BorderRadius.circular(100.00),
+  //               ),
+  //               child: Row(
+  //                 children: <Widget>[
+  //                   RouletteItem(
+  //                     'X2',
+  //                     Colors.black,
+  //                     BorderRadius.only(
+  //                         topLeft: Radius.circular(100),
+  //                         bottomLeft: Radius.circular(100)),
+  //                   ),
+  //                   RouletteItem(
+  //                     'X2',
+  //                     Colors.red,
+  //                     BorderRadius.only(
+  //                         topRight: Radius.circular(100),
+  //                         bottomRight: Radius.circular(100)),
+  //                   ),
+  //                 ],
+  //               )),
+  //         ),
+  //       ),
+  //       Container(
+  //         width: 100,
+  //         child: ElevatedButton(
+  //             onPressed: () {
+  //               roll();
+  //               alignmentAnimate();
+  //             },
+  //             child: DefaultTextWidget(
+  //               textContent: 'Roll!',
+  //             )),
+  //       )
+  //     ],
+  //   );
+  // }
 }
