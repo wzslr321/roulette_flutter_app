@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-
 class ScrollableMenu extends StatelessWidget {
   final List<Widget> scrollableItems;
   final EdgeInsets padding;

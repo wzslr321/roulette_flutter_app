@@ -15,15 +15,11 @@ class InvestMoney extends StatefulWidget {
 int _moneyInvested;
 
 class _InvestMoneyState extends State<InvestMoney> {
-
   @override
   Widget build(BuildContext context) {
-
     final _formKey = GlobalKey<FormState>();
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
-
-
 
     return Form(
       key: _formKey,

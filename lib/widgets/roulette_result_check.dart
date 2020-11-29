@@ -5,11 +5,9 @@ import '../models/default_text_class.dart';
 import '../providers/user_bet_provider.dart';
 import '../providers/roulette_state_provider.dart';
 
-
 class RouletteResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     UsersBet _usersBet = Provider.of<UsersBet>(context);
     RouletteState _rouletteState = Provider.of<RouletteState>(context);
 
@@ -21,8 +19,10 @@ class RouletteResult extends StatelessWidget {
     }
 
     void didUserWin() {
-      if ((((_rouletteState.isResultRed == true) && (_usersBet.bet == possibleBets.Red)) ||
-          ((_rouletteState.isResultRed == false) && (_usersBet.bet == possibleBets.Black)))) {
+      if ((((_rouletteState.isResultRed == true) &&
+              (_usersBet.bet == possibleBets.Red)) ||
+          ((_rouletteState.isResultRed == false) &&
+              (_usersBet.bet == possibleBets.Black)))) {
         print(_rouletteState.isResultRed);
         print(_usersBet.bet);
         _rouletteState.setWinner();
@@ -30,7 +30,6 @@ class RouletteResult extends StatelessWidget {
         _rouletteState.setLoser();
       }
     }
-
 
     if (_rouletteState.isFinished == true) {
       didEndOnRed();

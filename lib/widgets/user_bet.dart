@@ -6,37 +6,35 @@ import '../providers/invested_money_provider.dart';
 import '../providers/user_bet_provider.dart';
 
 class UserBet extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     UsersBet _usersBet = Provider.of<UsersBet>(context);
 
-
     return Consumer<InvestedMoney>(
-      builder: (_,money,__){
-        return (money.investedMoney != 0 && money.investedMoney != null )
+      builder: (_, money, __) {
+        return (money.investedMoney != 0 && money.investedMoney != null)
             ? Row(
-          children: <Widget>[
-            InkWell(
-              onTap:_usersBet.betBlack,
-              child: DefaultTextWidget(
-                textContent: 'Bet on black',
-              ),
-            ),
-            InkWell(
-              onTap:_usersBet.betRed,
-              child: DefaultTextWidget(
-                textContent: 'Bet on red',
-              ),
-            ),
-          ],
-        )
+                children: <Widget>[
+                  InkWell(
+                    onTap: _usersBet.betBlack,
+                    child: DefaultTextWidget(
+                      textContent: 'Bet on black',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: _usersBet.betRed,
+                    child: DefaultTextWidget(
+                      textContent: 'Bet on red',
+                    ),
+                  ),
+                ],
+              )
             : Container(
-          child: DefaultTextWidget(
-            textContent: 'Deposit money to bet!',
-          ),
-        );
-      },);
+                child: DefaultTextWidget(
+                  textContent: 'Deposit money to bet!',
+                ),
+              );
+      },
+    );
   }
 }

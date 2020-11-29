@@ -5,22 +5,20 @@ enum possibleBets {
   Red,
 }
 
-class UsersBet with ChangeNotifier{
-
+class UsersBet with ChangeNotifier {
   possibleBets userBet;
 
-  possibleBets get bet{
+  possibleBets get bet {
     return userBet;
   }
 
-  void betBlack(){
+  void betBlack() {
     userBet = possibleBets.Black;
     notifyListeners();
   }
-  void betRed(){
+
+  void betRed() {
     userBet = possibleBets.Red;
     notifyListeners();
   }
-
-
 }

@@ -35,6 +35,10 @@ class RouletteAnimationState extends State<RouletteAnimation>
   void roll() {
     _rouletteState.setTweenVal(0);
     _rouletteState.setTweenVal(new Random().nextInt(100) / 10 + 20);
+    String _convTweenVal = _rouletteState.tweenValue.toString();
+    if(_convTweenVal[3] == '5'){
+      _rouletteState.setTweenVal(new Random().nextInt(100) / 10 + 20);
+    }
     _rouletteState.resetWinner();
     _rouletteState.start();
     _animationController = AnimationController(
