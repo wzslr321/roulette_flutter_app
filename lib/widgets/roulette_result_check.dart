@@ -15,6 +15,7 @@ class RouletteResult extends StatelessWidget {
 
     void didEndOnRed() {
       String _convertedTweenVal = _rouletteState.tweenValue.toString();
+      print(_convertedTweenVal);
       if (int.parse(_convertedTweenVal[3]) < 5) _rouletteState.resultIsRed();
       _rouletteState.resultIsBlack();
     }
@@ -22,9 +23,12 @@ class RouletteResult extends StatelessWidget {
     void didUserWin() {
       if ((((_rouletteState.isResultRed == true) && (_usersBet.bet == possibleBets.Red)) ||
           ((_rouletteState.isResultRed == false) && (_usersBet.bet == possibleBets.Black)))) {
+        print(_rouletteState.isResultRed);
+        print(_usersBet.bet);
         _rouletteState.setWinner();
+      } else {
+        _rouletteState.setLoser();
       }
-      _rouletteState.setLoser();
     }
 
 
@@ -32,9 +36,6 @@ class RouletteResult extends StatelessWidget {
       didEndOnRed();
       didUserWin();
     }
-
-    print(_rouletteState.isWinner);
-    print(_rouletteState.isResultRed);
 
     return Column(
       children: <Widget>[

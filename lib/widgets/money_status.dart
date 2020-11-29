@@ -22,23 +22,26 @@ class MoneyStatus extends StatelessWidget {
       }
     }
 
-    if (_rouletteState.isFinished == true) {
-      assignMoney();
-      _rouletteState.resetEnd();
-    }
-
-
     return Column(
-      children: <Widget>[
-        Container(
+        children: <Widget>[
+          Container(
+              child: DefaultTextWidget(
+                  textContent: _investedMoney.investedMoney == null
+                      ? 'Your money deposit is empty'
+                      : 'You have ${_investedMoney
+                      .investedMoney}\$ in deposit')),
+          Container(
             child: DefaultTextWidget(
-                textContent: _investedMoney.investedMoney == null
-                    ? 'Your money deposit is empty'
-                    : 'You have ${_investedMoney.investedMoney}\$ in deposit')),
-        Container(
-            child: DefaultTextWidget(
-                textContent: 'You have ${_userMoney.quantity}\$ total'))
-      ],
+                textContent: 'You have ${_userMoney.quantity}\$ total'),),
+          _rouletteState.isFinished == true ?
+          ElevatedButton(
+              onPressed: () {
+                assignMoney();
+                _rouletteState.resetEnd();
+              },
+              child: Text("Roger that"),
+          ) : SizedBox()
+        ],
     );
   }
 }
