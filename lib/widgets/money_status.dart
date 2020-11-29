@@ -4,29 +4,42 @@ import 'package:provider/provider.dart';
 import '../models/default_text_class.dart';
 import '../providers/available_money_provider.dart';
 import '../providers/invested_money_provider.dart';
+import '../providers/roulette_state_provider.dart';
 
-class MoneyStatus extends StatefulWidget {
-  @override
-  _MoneyStatusState createState() => _MoneyStatusState();
-}
-
-class _MoneyStatusState extends State<MoneyStatus> {
+class MoneyStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Money userMoney = Provider.of<Money>(context);
+    Money _userMoney = Provider.of<Money>(context);
+    InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
+    RouletteState _rouletteState = Provider.of<RouletteState>(context);
+
+    void assignMoney() {
+      if (_rouletteState.isWinner == true) {
+        _userMoney.addMoney(_investedMoney.amount * 2);
+        _investedMoney.resetInvestmentMoney();
+      } else {
+        _investedMoney.resetInvestmentMoney();
+      }
+    }
+
+    print(_rouletteState.isWinner);
+
+    if (_rouletteState.isFinished == true) {
+      assignMoney();
+      print("XD");
+      _rouletteState.resetWinner();
+    }
 
     return Column(
       children: <Widget>[
-        Container(child: Consumer<InvestedMoney>(builder: (_, money, __) {
-          return DefaultTextWidget(
-              textContent: money == null
-                  ? 'Your money deposit is empty'
-                  : 'You have ${money.investedMoney}\$ in deposit');
-        })),
         Container(
             child: DefaultTextWidget(
-          textContent: 'You have ${userMoney.quantity}\$ total',
-        ))
+                textContent: _investedMoney.investedMoney == null
+                    ? 'Your money deposit is empty'
+                    : 'You have ${_investedMoney.investedMoney}\$ in deposit')),
+        Container(
+            child: DefaultTextWidget(
+                textContent: 'You have ${_userMoney.quantity}\$ total'))
       ],
     );
   }

@@ -5,14 +5,8 @@ import '../models/default_text_class.dart';
 import '../providers/invested_money_provider.dart';
 import '../providers/user_bet_provider.dart';
 
-class UserBet extends StatefulWidget {
+class UserBet extends StatelessWidget {
 
-  @override
-  _UserBetState createState() => _UserBetState();
-}
-
-
-class _UserBetState extends State<UserBet> {
   @override
   Widget build(BuildContext context) {
 

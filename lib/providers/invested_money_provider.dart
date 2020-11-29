@@ -9,12 +9,10 @@ class InvestedMoney with ChangeNotifier{
 
   void investMoney(int money){
     amount += money;
-    notifyListeners();
   }
 
   void resetInvestmentMoney(){
     amount = 0;
-    notifyListeners();
   }
 
 }

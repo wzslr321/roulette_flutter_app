@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class RouletteState with ChangeNotifier{
-  bool _didStart;
+  bool _didStart = false;
   bool _didEnd;
   double _tweenVal = 0.0;
   bool _isWinner;
+  bool _didEndRed;
 
   double get tweenValue{
     return _tweenVal;
@@ -23,6 +24,10 @@ class RouletteState with ChangeNotifier{
     return _isWinner;
   }
 
+  bool get isResultRed{
+    return _didEndRed;
+  }
+
 
   void start() {
     _didStart = true;
@@ -38,6 +43,24 @@ class RouletteState with ChangeNotifier{
   void setTweenVal(double val) {
     _tweenVal = val;
     notifyListeners();
+  }
+
+  void setWinner(){
+    _isWinner = true;
+  }
+  void setLoser(){
+    _isWinner = false;
+  }
+  void resetWinner() {
+    _isWinner = null;
+  }
+
+  void resultIsRed() {
+    _didEndRed = true;
+  }
+
+  void resultIsBlack(){
+    _didEndRed = false;
   }
 
 
