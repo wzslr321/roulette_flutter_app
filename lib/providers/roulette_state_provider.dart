@@ -40,6 +40,10 @@ class RouletteState with ChangeNotifier{
     notifyListeners();
   }
 
+  void resetEnd() {
+    _didEnd = null;
+  }
+
   void setTweenVal(double val) {
     _tweenVal = val;
     notifyListeners();

@@ -24,6 +24,7 @@ class _InvestMoneyState extends State<InvestMoney> {
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
 
 
+
     return Form(
       key: _formKey,
       child: Column(
@@ -48,6 +49,7 @@ class _InvestMoneyState extends State<InvestMoney> {
               if (_formKey.currentState.validate()) {
                 _userMoney.removeMoney(_moneyInvested);
                 _investedMoney.investMoney(_moneyInvested);
+                print(_moneyInvested);
               }
             },
             child: Text("Submit"),

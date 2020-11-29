@@ -22,13 +22,11 @@ class MoneyStatus extends StatelessWidget {
       }
     }
 
-    print(_rouletteState.isWinner);
-
     if (_rouletteState.isFinished == true) {
       assignMoney();
-      print("XD");
-      _rouletteState.resetWinner();
+      _rouletteState.resetEnd();
     }
+
 
     return Column(
       children: <Widget>[

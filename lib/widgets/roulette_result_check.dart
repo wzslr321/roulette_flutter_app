@@ -33,6 +33,9 @@ class RouletteResult extends StatelessWidget {
       didUserWin();
     }
 
+    print(_rouletteState.isWinner);
+    print(_rouletteState.isResultRed);
+
     return Column(
       children: <Widget>[
         Container(
