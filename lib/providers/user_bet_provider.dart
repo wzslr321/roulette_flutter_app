@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import './roulette_state_provider.dart';
 
-enum possibleBets {
-  Black,
-  Red,
-}
 
 class UsersBet with ChangeNotifier {
-  possibleBets userBet;
+  rouletteColorResult _userBet;
 
-  possibleBets get bet {
-    return userBet;
+  rouletteColorResult get bet {
+    return _userBet;
   }
 
   void betBlack() {
-    userBet = possibleBets.Black;
+    _userBet = rouletteColorResult.Black;
     notifyListeners();
   }
 
   void betRed() {
-    userBet = possibleBets.Red;
+    _userBet = rouletteColorResult.Red;
+    notifyListeners();
+  }
+
+  void betGreen() {
+    _userBet = rouletteColorResult.Green;
     notifyListeners();
   }
 }

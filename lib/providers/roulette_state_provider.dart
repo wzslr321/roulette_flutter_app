@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
+enum rouletteColorResult {
+    Black,
+    Red,
+    Green,
+}
+
 class RouletteState with ChangeNotifier {
   bool _didStart = false;
   bool _didEnd;
-  double _tweenVal = 0.0;
+  double _tweenVal;
   bool _isWinner;
-  bool _didEndRed;
+  rouletteColorResult _result;
 
   double get tweenValue {
     return _tweenVal;
@@ -23,9 +29,10 @@ class RouletteState with ChangeNotifier {
     return _isWinner;
   }
 
-  bool get isResultRed {
-    return _didEndRed;
+  rouletteColorResult get rouletteResult {
+    return _result;
   }
+
 
   void start() {
     _didStart = true;
@@ -60,10 +67,14 @@ class RouletteState with ChangeNotifier {
   }
 
   void resultIsRed() {
-    _didEndRed = true;
+    _result = rouletteColorResult.Red;
   }
 
   void resultIsBlack() {
-    _didEndRed = false;
+    _result = rouletteColorResult.Black;
+  }
+
+  void resultIsGreen(){
+    _result = rouletteColorResult.Green;
   }
 }
