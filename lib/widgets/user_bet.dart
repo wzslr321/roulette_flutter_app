@@ -17,20 +17,20 @@ class UserBet extends StatelessWidget {
                 children: <Widget>[
                   InkWell(
                     onTap: _usersBet.betBlack,
-                    child: DefaultTextWidget(
+                    child: const DefaultTextWidget(
                       textContent: 'Bet on black',
                     ),
                   ),
                   InkWell(
                     onTap: _usersBet.betRed,
-                    child: DefaultTextWidget(
+                    child: const DefaultTextWidget(
                       textContent: 'Bet on red',
                     ),
                   ),
                 ],
               )
             : Container(
-                child: DefaultTextWidget(
+                child: const DefaultTextWidget(
                   textContent: 'Deposit money to bet!',
                 ),
               );

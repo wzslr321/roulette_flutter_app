@@ -22,7 +22,7 @@ class HeaderInformation extends StatelessWidget {
             vertical: queryData.size.height * 0.01,
             horizontal: queryData.size.width * 0.025),
         margin: EdgeInsets.symmetric(horizontal: queryData.size.width * 0.05),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             bottom:
                 BorderSide(color: Color.fromRGBO(0, 29, 61, 0.7), width: 1.5),

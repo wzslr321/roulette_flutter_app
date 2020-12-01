@@ -26,7 +26,7 @@ class SpeedGameScreen extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               height: constraints.maxHeight * 0.15,
-              child: DefaultTextWidget(
+              child: const DefaultTextWidget(
                 textContent:
                     'This game is insanely easy. You get 1\$ for every tap!',
                 fontWeight: FontWeight.w100,
@@ -37,7 +37,7 @@ class SpeedGameScreen extends StatelessWidget {
             margin: EdgeInsets.only(top: constraints.maxHeight * 0.25),
             child: GradientBorderButtonContainer(
                 onPressed: _incrementMoney,
-                child: DefaultTextWidget(
+                child: const DefaultTextWidget(
                   textContent: "Tap me!",
                   fontWeight: FontWeight.w100,
                   fontSize: 40,

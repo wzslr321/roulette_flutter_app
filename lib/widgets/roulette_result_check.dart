@@ -11,20 +11,18 @@ class RouletteResult extends StatelessWidget {
     UsersBet _usersBet = Provider.of<UsersBet>(context);
     RouletteState _rouletteState = Provider.of<RouletteState>(context);
 
-    void didEndOnRed() {
+    void _didEndOnRed() {
       String _convertedTweenVal = _rouletteState.tweenValue.toString();
-      print(_convertedTweenVal);
       if (int.parse(_convertedTweenVal[3]) < 5) _rouletteState.resultIsRed();
       _rouletteState.resultIsBlack();
     }
 
-    void didUserWin() {
-      if ((((_rouletteState.isResultRed == true) &&
-              (_usersBet.bet == possibleBets.Red)) ||
-          ((_rouletteState.isResultRed == false) &&
-              (_usersBet.bet == possibleBets.Black)))) {
-        print(_rouletteState.isResultRed);
-        print(_usersBet.bet);
+    void _didUserWin() {
+      if ((_rouletteState.isResultRed == true) &&
+          (_usersBet.bet == possibleBets.Red)) {
+        _rouletteState.setWinner();
+      } else if ((_rouletteState.isResultRed == false) &&
+          (_usersBet.bet == possibleBets.Black)) {
         _rouletteState.setWinner();
       } else {
         _rouletteState.setLoser();
@@ -32,8 +30,8 @@ class RouletteResult extends StatelessWidget {
     }
 
     if (_rouletteState.isFinished == true) {
-      didEndOnRed();
-      didUserWin();
+      _didEndOnRed();
+      _didUserWin();
     }
 
     return Column(
@@ -43,13 +41,11 @@ class RouletteResult extends StatelessWidget {
           child: DefaultTextWidget(
               textContent: _rouletteState.isActive == false
                   ? 'Try your chances!'
-                  : _rouletteState.isFinished == false
+                  : _rouletteState.isWinner == null
                       ? 'You...'
-                      : _rouletteState.isWinner == null
-                          ? 'You...'
-                          : _rouletteState.isWinner != false
-                              ? 'You won!'
-                              : 'You lost'),
+                      : _rouletteState.isWinner != false
+                          ? 'You won!'
+                          : 'You lost'),
         ),
       ],
     );

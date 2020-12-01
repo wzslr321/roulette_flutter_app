@@ -26,10 +26,6 @@ class ProfileScreen extends StatelessWidget {
             ? 'You need $_moneyNeeded money to level up!'
             : 'You can level up your profile now!';
 
-    void _takeMoney() {
-      userMoney.money -= userLevel.moneyForLvl;
-    }
-
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: <Widget>[
@@ -58,14 +54,14 @@ class ProfileScreen extends StatelessWidget {
               ? GradientBorderButtonContainer(
                   onPressed: () {
                     userLevel.levelUp();
-                    _takeMoney();
+                    userMoney.removeMoney(userLevel.moneyForLvl);
                   },
-                  child: DefaultTextWidget(
+                  child: const DefaultTextWidget(
                     textContent: 'Level Up!',
                   ),
                 )
               : GradientBorderButtonContainer(
-                  child: DefaultTextWidget(
+                  child: const DefaultTextWidget(
                     textContent: 'Earn money first!',
                   ),
                 ),

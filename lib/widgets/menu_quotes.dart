@@ -23,7 +23,7 @@ class QuotesContainer extends StatelessWidget {
               right: queryData.size.width * 0.05,
               top: queryData.size.height * 0.035,
             ),
-            child: DefaultTextWidget(
+            child: const DefaultTextWidget(
               textContent: '"Speed" is sure money, without a risk',
             ),
           ),
@@ -32,7 +32,7 @@ class QuotesContainer extends StatelessWidget {
             padding: EdgeInsets.only(
                 left: queryData.size.width * 0.05,
                 top: queryData.size.height * 0.035),
-            child: DefaultTextWidget(
+            child: const DefaultTextWidget(
               textContent: '"Reflex" is like Russian roulette ',
             ),
           ),

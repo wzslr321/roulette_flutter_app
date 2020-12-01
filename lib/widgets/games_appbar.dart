@@ -11,12 +11,11 @@ class GameAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData queryData;
-    queryData = MediaQuery.of(context);
+    final MediaQueryData queryData = MediaQuery.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Money Maker",
         ),
         actions: <Widget>[

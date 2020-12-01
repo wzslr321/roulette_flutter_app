@@ -39,9 +39,9 @@ class MoneyStatus extends StatelessWidget {
                   assignMoney();
                   _rouletteState.resetEnd();
                 },
-                child: Text("Roger that"),
+                child: const Text("Roger that"),
               )
-            : SizedBox()
+            : const SizedBox()
       ],
     );
   }

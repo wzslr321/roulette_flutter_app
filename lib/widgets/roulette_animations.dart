@@ -11,7 +11,6 @@ class RouletteAnimation extends StatefulWidget {
   RouletteAnimationState createState() => RouletteAnimationState();
 }
 
-
 class RouletteAnimationState extends State<RouletteAnimation>
     with TickerProviderStateMixin {
   Animation _animation;
@@ -31,16 +30,19 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animationAlignmentController.forward();
   }
 
-
-  void roll() {
+  void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
     _rouletteState.setTweenVal(new Random().nextInt(100) / 10 + 20);
     String _convTweenVal = _rouletteState.tweenValue.toString();
-    if(_convTweenVal[3] == '5'){
+    if (_convTweenVal[3] == '5') {
       _rouletteState.setTweenVal(new Random().nextInt(100) / 10 + 20);
     }
     _rouletteState.resetWinner();
     _rouletteState.start();
+  }
+
+  void roll() {
+    _setNewValuesOnRoll();
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 10),
@@ -75,7 +77,6 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animationController.dispose();
   }
 
-
   RouletteState _rouletteState;
 
   @override
@@ -88,7 +89,8 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
-    _animation = Tween(begin: -1.0, end: _stateProvider.tweenValue).animate(_animation);
+    _animation =
+        Tween(begin: -1.0, end: _stateProvider.tweenValue).animate(_animation);
 
     _animationAlignment = CurvedAnimation(
         parent: _animationAlignmentController, curve: Curves.elasticInOut);
@@ -98,7 +100,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
     return Column(
       children: <Widget>[
         Transform(
-          alignment: FractionalOffset(2.0, 0.0),
+          alignment: const FractionalOffset(2.0, 0.0),
           transform: Matrix4.rotationZ(_animationAlignment.value),
           child: RotationTransition(
             turns: _animation,
@@ -129,13 +131,13 @@ class RouletteAnimationState extends State<RouletteAnimation>
           ),
         ),
         Container(
-          width: 100,
+          width: queryData.size.width * 0.2,
           child: ElevatedButton(
               onPressed: () {
                 roll();
                 alignmentAnimate();
               },
-              child: DefaultTextWidget(
+              child: const DefaultTextWidget(
                 textContent: 'Roll!',
               )),
         )
@@ -143,4 +145,3 @@ class RouletteAnimationState extends State<RouletteAnimation>
     );
   }
 }
-

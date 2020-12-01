@@ -7,9 +7,9 @@ class PageNotFound extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Route not found"),
+        title: const Text("Route not found"),
       ),
-      body: Container(child: Text("Route not found")),
+      body: Container(child: const Text("Route not found")),
     );
   }
 }

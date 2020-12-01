@@ -23,7 +23,7 @@ class DefaultTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
 
-    final textWidget = Text(textContent,
+    final textWidget =  Text(textContent,
         textAlign: textAlign,
         style: TextStyle(
           fontSize: fontSize * curScaleFactor,

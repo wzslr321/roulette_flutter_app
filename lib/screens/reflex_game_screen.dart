@@ -15,6 +15,10 @@ class ReflexGameScreen extends StatefulWidget {
   _ReflexGameScreenState createState() => _ReflexGameScreenState();
 }
 
+// This file is awful, and I am aware of it.
+// It is  made chaotic, just to give a possibility to earn money.
+// Mini-games most probably are  going to be totally rebuild.
+
 bool _isAccepted;
 int _timeDotRenderMs;
 int _timeDotRenderS;
@@ -75,7 +79,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> {
                           height: constraints.maxHeight * 0.15,
                           child: GradientBorderButtonContainer(
                             onPressed: _startGame,
-                            child: DefaultTextWidget(
+                            child: const DefaultTextWidget(
                               fontWeight: FontWeight.w100,
                               textContent: 'Click to start',
                             ),

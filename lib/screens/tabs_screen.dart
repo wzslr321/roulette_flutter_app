@@ -52,7 +52,7 @@ class _TabsScreen extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Money Maker",
           style: TextStyle(fontWeight: FontWeight.w100, color: Colors.white),
         ),
@@ -60,20 +60,20 @@ class _TabsScreen extends State<TabsScreen> {
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.white,
-        unselectedItemColor: Color.fromRGBO(0, 29, 61, 1),
+        unselectedItemColor: const Color.fromRGBO(0, 29, 61, 1),
         currentIndex: _selectedPageIndex,
         onTap: _selectPage,
         backgroundColor: Theme.of(context).primaryColor,
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.circle),
             label: "Roulette",
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             label: "Menu",
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.assignment_ind),
             label: "Profile",
           ),

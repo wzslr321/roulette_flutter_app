@@ -12,14 +12,14 @@ class InvestMoney extends StatefulWidget {
   _InvestMoneyState createState() => _InvestMoneyState();
 }
 
-int _moneyInvested;
-
 class _InvestMoneyState extends State<InvestMoney> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
+
+    int _moneyInvested;
 
     return Form(
       key: _formKey,
@@ -47,7 +47,7 @@ class _InvestMoneyState extends State<InvestMoney> {
                 _investedMoney.investMoney(_moneyInvested);
               }
             },
-            child: Text("Submit"),
+            child: const Text("Submit"),
           )
         ],
       ),

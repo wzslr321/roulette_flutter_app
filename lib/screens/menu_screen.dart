@@ -15,6 +15,11 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final MediaQueryData queryData = MediaQuery.of(context);
 
+    const BorderSide _containerBorder = const BorderSide(
+      width: 3.0,
+      color: Color.fromRGBO(0, 29, 61, 0.7),
+    );
+
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: <Widget>[
@@ -24,14 +29,8 @@ class MenuScreen extends StatelessWidget {
             height: constraints.maxHeight * 0.4,
             decoration: BoxDecoration(
                 border: Border(
-              top: BorderSide(
-                width: 3.0,
-                color: Color.fromRGBO(0, 29, 61, 0.7),
-              ),
-              bottom: BorderSide(
-                width: 3.0,
-                color: Color.fromRGBO(0, 29, 61, 0.7),
-              ),
+              top: _containerBorder,
+              bottom: _containerBorder,
             )),
             child: ScrollableMenu(
               itemCount: 2,
