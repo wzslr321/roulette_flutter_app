@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'dart:math';
 
-import './roulette_item.dart';
 import '../../models/default_text_class.dart';
 import '../../providers/roulette_state_provider.dart';
 
@@ -97,6 +97,29 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animationAlignment =
         Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
 
+
+    Map<String, double> dataMap = {
+      "Red1": 1,
+      "Black1": 1,
+      "Green1": 1,
+      "Red2":1,
+      "Black2":1,
+      "Green2":1,
+      "Red3":1,
+      "Black3":1
+    };
+
+    List<Color> _rouletteColors = [
+        Colors.redAccent,
+        Colors.black87,
+        Colors.green,
+        Colors.redAccent,
+        Colors.black87,
+        Colors.redAccent,
+        Colors.green,
+        Colors.black87,
+    ];
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.00),
@@ -109,27 +132,38 @@ class RouletteAnimationState extends State<RouletteAnimation>
             transform: Matrix4.rotationZ(_animationAlignment.value),
             child: RotationTransition(
               turns: _animation,
-                  child: Row(
-                    children: <Widget>[
-                      RouletteItem(
-                        'X2',
-                        Colors.black,
+                  child:PieChart(
+                    dataMap: dataMap,
+                    colorList:_rouletteColors,
+                    animationDuration: Duration(milliseconds: 800),
+                    chartLegendSpacing: 32,
+                    chartRadius: MediaQuery.of(context).size.width / 3.2,
+                    initialAngleInDegree: 0,
+                    chartType: ChartType.disc,
+                    ringStrokeWidth: 32,
+                    legendOptions: LegendOptions(
+                      showLegendsInRow: false,
+                      legendPosition: LegendPosition.right,
+                      showLegends: false,
+                      legendTextStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
-                      RouletteItem(
-                        'X2',
-                        Colors.red,
-                      ),
-                      RouletteItem(
-                        'X2',
-                        Colors.red,
-                      ),
-                      RouletteItem(
-                        'X2',
-                        Colors.red,
-                      ),
-                    ],
-                  )),
+                    ),
+                    chartValuesOptions: ChartValuesOptions(
+                      showChartValueBackground: false,
+                      showChartValues: false,
+                      showChartValuesInPercentage: false,
+                      showChartValuesOutside: false,
+                    ),
+                  ),),
             ),
+          SizedBox(
+            height:queryData.size.height * 0.02,
+            width: queryData.size.width * 0.005,
+            child: Container(
+              color: Colors.black,
+            ),
+          ),
           Container(
             width: queryData.size.width * 0.2,
             child: ElevatedButton(

@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   provider: ^3.0.0
   intl: ^0.15.8
+  pie_chart: ^4.0.1
 
 
 
