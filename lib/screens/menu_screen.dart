@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/menu_and_profile_header.dart';
-import '../widgets/menu_quotes.dart';
-import '../widgets/scrollable_menu.dart';
-import '../widgets/menu_game_buttons.dart';
+import '../widgets/menu/menu_quotes.dart';
+import '../widgets/menu/scrollable_menu.dart';
+import '../widgets/menu/menu_game_buttons.dart';
 
-import './speed_game_screen.dart';
-import './reflex_game_screen.dart';
+import 'mini-games/speed_game_screen.dart';
+import 'mini-games/reflex_game_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   static const routeName = "/";

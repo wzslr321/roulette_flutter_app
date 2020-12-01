@@ -11,8 +11,8 @@ import './screens/tabs_screen.dart';
 import './screens/menu_screen.dart';
 import './screens/profile_screen.dart';
 import './screens/roulette_screen.dart';
-import './screens/speed_game_screen.dart';
-import './screens/reflex_game_screen.dart';
+import 'screens/mini-games/speed_game_screen.dart';
+import 'screens/mini-games/reflex_game_screen.dart';
 import './screens/page_not_found_screen.dart';
 
 void main() => runApp(MyApp());

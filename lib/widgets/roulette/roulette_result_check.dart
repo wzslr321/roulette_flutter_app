@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/default_text_class.dart';
-import '../providers/user_bet_provider.dart';
-import '../providers/roulette_state_provider.dart';
+import '../../models/default_text_class.dart';
+import '../../providers/user_bet_provider.dart';
+import '../../providers/roulette_state_provider.dart';
 
 class RouletteResult extends StatelessWidget {
   @override

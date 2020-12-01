@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/available_money_provider.dart';
-import '../providers/invested_money_provider.dart';
+import '../../providers/available_money_provider.dart';
+import '../../providers/invested_money_provider.dart';
 
 class InvestMoney extends StatefulWidget {
   InvestMoney({Key key}) : super(key: key);

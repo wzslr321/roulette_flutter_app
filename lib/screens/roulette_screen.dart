@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/roulette_animations.dart';
-import '../widgets/user_bet.dart';
-import '../widgets/invest_money.dart';
-import '../widgets/roulette_result_check.dart';
+import '../widgets/roulette/roulette_animations.dart';
+import '../widgets/roulette/user_bet.dart';
+import '../widgets/roulette/invest_money.dart';
+import '../widgets/roulette/roulette_result_check.dart';
 import '../widgets/money_status.dart';
 
 class RouletteScreen extends StatefulWidget {

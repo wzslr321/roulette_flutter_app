@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
-import '../widgets/roulette_item.dart';
-import '../models/default_text_class.dart';
-import '../providers/roulette_state_provider.dart';
+import './roulette_item.dart';
+import '../../models/default_text_class.dart';
+import '../../providers/roulette_state_provider.dart';
 
 class RouletteAnimation extends StatefulWidget {
   @override
@@ -97,51 +97,52 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animationAlignment =
         Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
 
-    return Column(
-      children: <Widget>[
-        Transform(
-          alignment: const FractionalOffset(2.0, 0.0),
-          transform: Matrix4.rotationZ(_animationAlignment.value),
-          child: RotationTransition(
-            turns: _animation,
-            child: Container(
-                width: queryData.size.width * 0.5,
-                height: queryData.size.height * 0.3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100.00),
-                ),
-                child: Row(
-                  children: <Widget>[
-                    RouletteItem(
-                      'X2',
-                      Colors.black,
-                      BorderRadius.only(
-                          topLeft: Radius.circular(100),
-                          bottomLeft: Radius.circular(100)),
-                    ),
-                    RouletteItem(
-                      'X2',
-                      Colors.red,
-                      BorderRadius.only(
-                          topRight: Radius.circular(100),
-                          bottomRight: Radius.circular(100)),
-                    ),
-                  ],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.00),
+      ),
+      width: queryData.size.width * 0.5,
+      child: Column(
+        children: <Widget>[
+          Transform(
+            alignment: const FractionalOffset(2.0, 0.0),
+            transform: Matrix4.rotationZ(_animationAlignment.value),
+            child: RotationTransition(
+              turns: _animation,
+                  child: Row(
+                    children: <Widget>[
+                      RouletteItem(
+                        'X2',
+                        Colors.black,
+                      ),
+                      RouletteItem(
+                        'X2',
+                        Colors.red,
+                      ),
+                      RouletteItem(
+                        'X2',
+                        Colors.red,
+                      ),
+                      RouletteItem(
+                        'X2',
+                        Colors.red,
+                      ),
+                    ],
+                  )),
+            ),
+          Container(
+            width: queryData.size.width * 0.2,
+            child: ElevatedButton(
+                onPressed: () {
+                  roll();
+                  alignmentAnimate();
+                },
+                child: const DefaultTextWidget(
+                  textContent: 'Roll!',
                 )),
-          ),
-        ),
-        Container(
-          width: queryData.size.width * 0.2,
-          child: ElevatedButton(
-              onPressed: () {
-                roll();
-                alignmentAnimate();
-              },
-              child: const DefaultTextWidget(
-                textContent: 'Roll!',
-              )),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

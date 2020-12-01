@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import './menu_screen.dart';
 import './profile_screen.dart';
 import './roulette_screen.dart';
-import './speed_game_screen.dart';
-import './reflex_game_screen.dart';
+import 'mini-games/speed_game_screen.dart';
+import 'mini-games/reflex_game_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   final Widget displayedScreen;

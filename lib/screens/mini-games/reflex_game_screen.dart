@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
-import '../widgets/games_appbar.dart';
-import '../models/default_text_class.dart';
-import '../models/gradient_button_class.dart';
-import '../providers/available_money_provider.dart';
-import '../widgets/reflex_menu_info.dart';
+import '../../widgets/mini_games/games_appbar.dart';
+import '../../models/default_text_class.dart';
+import '../../models/gradient_button_class.dart';
+import '../../providers/available_money_provider.dart';
+import '../../widgets/mini_games/reflex_menu_info.dart';
 
 class ReflexGameScreen extends StatefulWidget {
   static const routeName = '/game/reflex';
