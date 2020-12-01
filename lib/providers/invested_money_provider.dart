@@ -14,6 +14,5 @@ class InvestedMoney with ChangeNotifier {
 
   void resetInvestmentMoney() {
     amount = 0;
-    notifyListeners();
   }
 }

@@ -32,23 +32,23 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
-    // _rouletteState.setTweenVal(new Random().nextInt(1000000) / 100000 + 20);
-    // String _convTweenVal = _rouletteState.tweenValue.toString();
-    // List<String> _nonAcceptableValues = [
-    //   "125",
-    //   "250",
-    //   "375",
-    //   "500",
-    //   "625",
-    //   "750",
-    //   "875",
-    //   "1000",
-    // ];
-    // for(var i = 0; i < _nonAcceptableValues.length; i++){
-    //   if(_convTweenVal.substring(3,6) == _nonAcceptableValues[i]){
-    //     _rouletteState.setTweenVal(new Random().nextInt(10000) / 1000 + 20);
-    //   }
-    // }
+    _rouletteState.setTweenVal(new Random().nextInt(1000000) / 100000 + 20);
+    String _convTweenVal = _rouletteState.tweenValue.toString();
+    List<String> _nonAcceptableValues = [
+      "125",
+      "250",
+      "375",
+      "500",
+      "625",
+      "750",
+      "875",
+      "1000",
+    ];
+    for(var i = 0; i < _nonAcceptableValues.length; i++){
+      if(_convTweenVal.substring(3,6) == _nonAcceptableValues[i]){
+        _rouletteState.setTweenVal(new Random().nextInt(10000) / 1000 + 20);
+      }
+    }
 
     _rouletteState.resetWinner();
     _rouletteState.start();

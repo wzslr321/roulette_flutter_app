@@ -13,14 +13,7 @@ class MoneyStatus extends StatelessWidget {
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
     RouletteState _rouletteState = Provider.of<RouletteState>(context);
 
-    void assignMoney() {
-      if (_rouletteState.isWinner == true) {
-        _userMoney.addMoney(_investedMoney.amount * 2);
-        _investedMoney.resetInvestmentMoney();
-      } else {
-        _investedMoney.resetInvestmentMoney();
-      }
-    }
+
 
     return Column(
       children: <Widget>[
@@ -36,7 +29,6 @@ class MoneyStatus extends StatelessWidget {
         _rouletteState.isFinished == true
             ? ElevatedButton(
                 onPressed: () {
-                  assignMoney();
                   _rouletteState.resetEnd();
                 },
                 child: const Text("Roger that"),

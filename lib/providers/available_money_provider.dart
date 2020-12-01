@@ -24,7 +24,6 @@ class Money with ChangeNotifier {
 
   void addMoney(int moneyAmount) {
     money += moneyAmount;
-    notifyListeners();
   }
 
   void removeMoney(int moneyAmount) {

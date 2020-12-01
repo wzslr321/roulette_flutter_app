@@ -27,6 +27,12 @@ class UserBet extends StatelessWidget {
                       textContent: 'Bet on red',
                     ),
                   ),
+                  InkWell(
+                    onTap: _usersBet.betGreen,
+                    child: const DefaultTextWidget(
+                      textContent: 'Bet on gren',
+                    ),
+                  ),
                 ],
               )
             : Container(
