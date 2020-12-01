@@ -12,9 +12,23 @@ class RouletteResult extends StatelessWidget {
     RouletteState _rouletteState = Provider.of<RouletteState>(context);
 
     void _didEndOnRed() {
+      List<int> _redPartValues = [
+        125,
+        250,
+        375,
+        500,
+        750,
+        875,
+      ];
       String _convertedTweenVal = _rouletteState.tweenValue.toString();
-      if (int.parse(_convertedTweenVal[3]) < 5) _rouletteState.resultIsRed();
-      _rouletteState.resultIsBlack();
+      int _comparableVal = int.parse(_convertedTweenVal.substring(3, 6));
+      for (var i = 0; i < _redPartValues.length - 1; i+=2) {
+          if (_comparableVal > _redPartValues[i] &&
+              _comparableVal < _redPartValues[i + 1]) {
+            _rouletteState.resultIsRed();
+            break;
+          }
+      }
     }
 
     void _didUserWin() {

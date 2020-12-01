@@ -32,11 +32,24 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
-    _rouletteState.setTweenVal(new Random().nextInt(100) / 10 + 20);
+    _rouletteState.setTweenVal(new Random().nextInt(10000) / 1000 + 20);
     String _convTweenVal = _rouletteState.tweenValue.toString();
-    if (_convTweenVal[3] == '5') {
-      _rouletteState.setTweenVal(new Random().nextInt(100) / 10 + 20);
+    List<String> _nonAcceptableValues = [
+      "125",
+      "250",
+      "375",
+      "500",
+      "625",
+      "750",
+      "875",
+      "1000",
+    ];
+    for(var i = 0; i < _nonAcceptableValues.length; i++){
+      if(_convTweenVal.substring(3,6) == _nonAcceptableValues[i]){
+        _rouletteState.setTweenVal(new Random().nextInt(10000) / 1000 + 20);
+      }
     }
+
     _rouletteState.resetWinner();
     _rouletteState.start();
   }
@@ -81,6 +94,9 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   @override
   Widget build(BuildContext context) {
+
+
+
     MediaQueryData queryData = MediaQuery.of(context);
 
     RouletteState _stateProvider = Provider.of<RouletteState>(context);
@@ -97,27 +113,26 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animationAlignment =
         Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
 
-
     Map<String, double> dataMap = {
       "Red1": 1,
       "Black1": 1,
       "Green1": 1,
-      "Red2":1,
-      "Black2":1,
-      "Green2":1,
-      "Red3":1,
-      "Black3":1
+      "Red2": 1,
+      "Black2": 1,
+      "Green2": 1,
+      "Red3": 1,
+      "Black3": 1
     };
 
     List<Color> _rouletteColors = [
-        Colors.redAccent,
-        Colors.black87,
-        Colors.green,
-        Colors.redAccent,
-        Colors.black87,
-        Colors.redAccent,
-        Colors.green,
-        Colors.black87,
+      Colors.redAccent,
+      Colors.black87,
+      Colors.green,
+      Colors.redAccent,
+      Colors.black87,
+      Colors.redAccent,
+      Colors.green,
+      Colors.black87,
     ];
 
     return Container(
@@ -132,33 +147,34 @@ class RouletteAnimationState extends State<RouletteAnimation>
             transform: Matrix4.rotationZ(_animationAlignment.value),
             child: RotationTransition(
               turns: _animation,
-                  child:PieChart(
-                    dataMap: dataMap,
-                    colorList:_rouletteColors,
-                    animationDuration: Duration(milliseconds: 800),
-                    chartLegendSpacing: 32,
-                    chartRadius: MediaQuery.of(context).size.width / 3.2,
-                    initialAngleInDegree: 0,
-                    chartType: ChartType.disc,
-                    ringStrokeWidth: 32,
-                    legendOptions: LegendOptions(
-                      showLegendsInRow: false,
-                      legendPosition: LegendPosition.right,
-                      showLegends: false,
-                      legendTextStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    chartValuesOptions: ChartValuesOptions(
-                      showChartValueBackground: false,
-                      showChartValues: false,
-                      showChartValuesInPercentage: false,
-                      showChartValuesOutside: false,
-                    ),
-                  ),),
+              child: PieChart(
+                dataMap: dataMap,
+                colorList: _rouletteColors,
+                animationDuration: Duration(milliseconds: 800),
+                chartLegendSpacing: 32,
+                chartRadius: MediaQuery.of(context).size.width / 3.2,
+                initialAngleInDegree: 0,
+                chartType: ChartType.disc,
+                ringStrokeWidth: 32,
+                legendOptions: LegendOptions(
+                  showLegendsInRow: false,
+                  legendPosition: LegendPosition.right,
+                  showLegends: false,
+                  legendTextStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                chartValuesOptions: ChartValuesOptions(
+                  showChartValueBackground: false,
+                  showChartValues: false,
+                  showChartValuesInPercentage: false,
+                  showChartValuesOutside: false,
+                ),
+              ),
             ),
+          ),
           SizedBox(
-            height:queryData.size.height * 0.02,
+            height: queryData.size.height * 0.02,
             width: queryData.size.width * 0.005,
             child: Container(
               color: Colors.black,
