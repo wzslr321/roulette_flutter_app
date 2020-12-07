@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pie_chart/pie_chart.dart';
 import 'dart:math';
 
 import '../../models/default_text_class.dart';
 import '../../providers/roulette_state_provider.dart';
+import './roulette_static_data.dart';
+import './roulette_pie_widget.dart';
 
 class RouletteAnimation extends StatefulWidget {
   @override
@@ -32,8 +33,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
-    _rouletteState
-        .setTweenVal(new Random().nextInt(_rouletteColors.length) / 1);
+    _rouletteState.setTweenVal(new Random().nextInt(rouletteColors.length) / 1);
     _rouletteState.resetWinner();
     _rouletteState.start();
   }
@@ -76,28 +76,6 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   RouletteState _rouletteState;
 
-  Map<String, double> _dataMap = {
-    "Red1": 1,
-    "Black1": 1,
-    "Green1": 1,
-    "Red2": 1,
-    "Black2": 1,
-    "Green2": 1,
-    "Red3": 1,
-    "Black3": 1
-  };
-
-  List<Color> _rouletteColors = [
-    Colors.redAccent,
-    Colors.black87,
-    Colors.green,
-    Colors.redAccent,
-    Colors.black87,
-    Colors.redAccent,
-    Colors.green,
-    Colors.black87,
-  ];
-
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
@@ -125,36 +103,9 @@ class RouletteAnimationState extends State<RouletteAnimation>
       width: queryData.size.width * 0.5,
       child: Column(
         children: <Widget>[
-          Transform(
-            alignment: const FractionalOffset(2.0, 0.0),
-            transform: Matrix4.rotationZ(_animationAlignment.value),
-            child: RotationTransition(
-              turns: _animation,
-              child: PieChart(
-                dataMap: _dataMap,
-                colorList: _rouletteColors,
-                animationDuration: Duration(milliseconds: 800),
-                chartLegendSpacing: 32,
-                chartRadius: MediaQuery.of(context).size.width / 3.2,
-                initialAngleInDegree: 0,
-                chartType: ChartType.disc,
-                ringStrokeWidth: 32,
-                legendOptions: LegendOptions(
-                  showLegendsInRow: false,
-                  legendPosition: LegendPosition.right,
-                  showLegends: false,
-                  legendTextStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                chartValuesOptions: ChartValuesOptions(
-                  showChartValueBackground: false,
-                  showChartValues: false,
-                  showChartValuesInPercentage: false,
-                  showChartValuesOutside: false,
-                ),
-              ),
-            ),
+          RoulettePie(
+            animationAlignment: _animationAlignment,
+            spinAnimation: _animation,
           ),
           SizedBox(
             height: queryData.size.height * 0.02,
