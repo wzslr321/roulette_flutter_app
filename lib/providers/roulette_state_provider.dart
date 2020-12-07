@@ -9,11 +9,11 @@ enum rouletteColorResult {
 class RouletteState with ChangeNotifier {
   bool _didStart = false;
   bool _didEnd;
-  double _tweenVal;
+  int _tweenVal;
   bool _isWinner;
   rouletteColorResult _result;
 
-  double get tweenValue {
+  int get tweenValue {
     return _tweenVal;
   }
 
@@ -48,7 +48,7 @@ class RouletteState with ChangeNotifier {
     _didEnd = null;
   }
 
-  void setTweenVal(double val) {
+  void setTweenVal(int val) {
     _tweenVal = val;
     notifyListeners();
   }

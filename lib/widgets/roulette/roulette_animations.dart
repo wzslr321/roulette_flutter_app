@@ -20,6 +20,18 @@ class RouletteAnimationState extends State<RouletteAnimation>
   Animation _animationAlignment;
   AnimationController _animationAlignmentController;
 
+  void _assignTweenValueToResult() {
+    for(var i = 1; i <= colorMaxValues.length; i++){
+      if(_rouletteState.tweenValue.round() == i){
+        if(_rouletteState.tweenValue.round() != 0) {
+          int tweenRandMax = colorMaxValues[i - 1][i.toDouble()];
+          int randTweenValue = new Random().nextInt(125) + (tweenRandMax - 125);
+          _rouletteState.setTweenVal(randTweenValue);
+        }
+      }
+    }
+  }
+
   void alignmentAnimate() {
     _animationAlignmentController =
         AnimationController(vsync: this, duration: const Duration(seconds: 4));
@@ -33,13 +45,13 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
-    _rouletteState.setTweenVal(new Random().nextInt(rouletteColors.length) / 1);
     _rouletteState.resetWinner();
     _rouletteState.start();
   }
 
   void roll() {
     _setNewValuesOnRoll();
+    _assignTweenValueToResult();
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 10),
@@ -87,7 +99,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     if (_stateProvider.tweenValue != null) {
-      _animation = Tween(begin: -1.0, end: _stateProvider.tweenValue + 15)
+      _animation = Tween(begin: -1.0, end: _rouletteState.tweenValue.roundToDouble() + 15)
           .animate(_animation);
     }
 
