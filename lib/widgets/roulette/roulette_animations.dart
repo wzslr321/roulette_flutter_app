@@ -32,24 +32,8 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
-    _rouletteState.setTweenVal(new Random().nextInt(1000000) / 100000 + 20);
-    String _convTweenVal = _rouletteState.tweenValue.toString();
-    List<String> _nonAcceptableValues = [
-      "125",
-      "250",
-      "375",
-      "500",
-      "625",
-      "750",
-      "875",
-      "1000",
-    ];
-    for(var i = 0; i < _nonAcceptableValues.length; i++){
-      if(_convTweenVal.substring(3,6) == _nonAcceptableValues[i]){
-        _rouletteState.setTweenVal(new Random().nextInt(10000) / 1000 + 20);
-      }
-    }
-
+    _rouletteState
+        .setTweenVal(new Random().nextInt(_rouletteColors.length) / 1);
     _rouletteState.resetWinner();
     _rouletteState.start();
   }
@@ -92,11 +76,30 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   RouletteState _rouletteState;
 
+  Map<String, double> _dataMap = {
+    "Red1": 1,
+    "Black1": 1,
+    "Green1": 1,
+    "Red2": 1,
+    "Black2": 1,
+    "Green2": 1,
+    "Red3": 1,
+    "Black3": 1
+  };
+
+  List<Color> _rouletteColors = [
+    Colors.redAccent,
+    Colors.black87,
+    Colors.green,
+    Colors.redAccent,
+    Colors.black87,
+    Colors.redAccent,
+    Colors.green,
+    Colors.black87,
+  ];
+
   @override
   Widget build(BuildContext context) {
-
-
-
     MediaQueryData queryData = MediaQuery.of(context);
 
     RouletteState _stateProvider = Provider.of<RouletteState>(context);
@@ -105,35 +108,15 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
-    _animation =
-        Tween(begin: -1.0, end: _stateProvider.tweenValue).animate(_animation);
+    if (_stateProvider.tweenValue != null) {
+      _animation = Tween(begin: -1.0, end: _stateProvider.tweenValue + 15)
+          .animate(_animation);
+    }
 
     _animationAlignment = CurvedAnimation(
         parent: _animationAlignmentController, curve: Curves.elasticInOut);
     _animationAlignment =
         Tween(begin: 0.0, end: 1.0).animate(_animationAlignment);
-
-    Map<String, double> dataMap = {
-      "Red1": 1,
-      "Black1": 1,
-      "Green1": 1,
-      "Red2": 1,
-      "Black2": 1,
-      "Green2": 1,
-      "Red3": 1,
-      "Black3": 1
-    };
-
-    List<Color> _rouletteColors = [
-      Colors.redAccent,
-      Colors.black87,
-      Colors.green,
-      Colors.redAccent,
-      Colors.black87,
-      Colors.redAccent,
-      Colors.green,
-      Colors.black87,
-    ];
 
     return Container(
       decoration: BoxDecoration(
@@ -148,7 +131,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
             child: RotationTransition(
               turns: _animation,
               child: PieChart(
-                dataMap: dataMap,
+                dataMap: _dataMap,
                 colorList: _rouletteColors,
                 animationDuration: Duration(milliseconds: 800),
                 chartLegendSpacing: 32,

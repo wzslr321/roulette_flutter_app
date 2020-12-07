@@ -15,39 +15,24 @@ class RouletteResult extends StatelessWidget {
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
 
-    int _comparableVal;
-
-    if (_rouletteState.tweenValue != null && _rouletteState.tweenValue != 0.0) {
-      String _convertedTweenVal = _rouletteState.tweenValue.toString();
-      _comparableVal = int.parse(_convertedTweenVal.substring(3, 6));
-    }
-
     void _didEndOnRed() {
-      List<int> _redPartValues = [
-        125,
-        250,
-        500,
-        625,
-        750,
-        875,
+      List<double> _redPartValues = [
+        2.0,
+        5.0,
+        7.0,
       ];
-      for (var i = 0; i < _redPartValues.length - 1; i += 2) {
-        if (_comparableVal > _redPartValues[i] &&
-            _comparableVal < _redPartValues[i + 1]) {
+      for (var i = 0; i < _redPartValues.length - 1; i++) {
+        if (_rouletteState.tweenValue == _redPartValues[i]) {
           _rouletteState.resultIsRed();
-          print(_comparableVal);
-          print(_redPartValues[i]);
-          print(_redPartValues[i + 1]);
           break;
         }
       }
     }
 
     void _didEndOnGreen() {
-      List<int> _greenPartValues = [375, 500, 875, 1000];
-      for (var i = 0; i < _greenPartValues.length - 1; i += 2) {
-        if (_comparableVal > _greenPartValues[i] &&
-            _comparableVal < _greenPartValues[i + 1]) {
+      List<double> _greenPartValues = [4.0,9.0];
+      for (var i = 0; i < _greenPartValues.length - 1; i ++) {
+        if (_rouletteState.tweenValue == _greenPartValues[i] ) {
           _rouletteState.resultIsGreen();
           break;
         }
@@ -55,6 +40,7 @@ class RouletteResult extends StatelessWidget {
     }
 
     void _didEndOnBlack() {
+      print(_rouletteState.rouletteResult);
       if (_rouletteState.rouletteResult != rouletteColorResult.Red) {
         if (_rouletteState.rouletteResult != rouletteColorResult.Green) {
           _rouletteState.resultIsBlack();
