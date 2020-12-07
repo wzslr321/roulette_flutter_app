@@ -22,7 +22,9 @@ class RouletteResult extends StatelessWidget {
         7.0,
       ];
       for (var i = 0; i < _redPartValues.length - 1; i++) {
-        if (_rouletteState.tweenValue == _redPartValues[i]) {
+        if (_rouletteState.itemValue == _redPartValues[i]) {
+          print(_rouletteState.itemValue);
+          print("RED");
           _rouletteState.resultIsRed();
           break;
         }
@@ -32,7 +34,9 @@ class RouletteResult extends StatelessWidget {
     void _didEndOnGreen() {
       List<double> _greenPartValues = [4.0,9.0];
       for (var i = 0; i < _greenPartValues.length - 1; i ++) {
-        if (_rouletteState.tweenValue == _greenPartValues[i] ) {
+        if (_rouletteState.itemValue == _greenPartValues[i] ) {
+          print(_rouletteState.itemValue);
+          print("GREEN");
           _rouletteState.resultIsGreen();
           break;
         }
@@ -40,9 +44,10 @@ class RouletteResult extends StatelessWidget {
     }
 
     void _didEndOnBlack() {
-      print(_rouletteState.rouletteResult);
       if (_rouletteState.rouletteResult != rouletteColorResult.Red) {
         if (_rouletteState.rouletteResult != rouletteColorResult.Green) {
+          print(_rouletteState.itemValue);
+          print("BLACK");
           _rouletteState.resultIsBlack();
         }
       }

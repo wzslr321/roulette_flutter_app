@@ -21,12 +21,21 @@ class RouletteAnimationState extends State<RouletteAnimation>
   AnimationController _animationAlignmentController;
 
   void _assignTweenValueToResult() {
-    for(var i = 1; i <= colorMaxValues.length; i++){
-      if(_rouletteState.tweenValue.round() == i){
-        if(_rouletteState.tweenValue.round() != 0) {
+    for (var i = 1; i <= colorMaxValues.length; i++) {
+      if (_rouletteState.tweenValue.round() == i) {
+        if (_rouletteState.tweenValue.round() != 0) {
           int tweenRandMax = colorMaxValues[i - 1][i.toDouble()];
           int randTweenValue = new Random().nextInt(125) + (tweenRandMax - 125);
-          _rouletteState.setTweenVal(randTweenValue);
+          for (var z = 1; z < itemsIndex.length; i++) {
+             while (randTweenValue == itemsIndex[i-1]) {
+               randTweenValue = new Random().nextInt(125) + (tweenRandMax - 125);
+            }
+            if (randTweenValue != itemsIndex[i-1]) {
+              _rouletteState.setTweenVal(randTweenValue / 1000);
+              print(_rouletteState.tweenValue);
+              break;
+            }
+          }
         }
       }
     }
@@ -45,13 +54,15 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
+    _rouletteState.setTweenVal((new Random().nextInt(rouletteColors.length).roundToDouble()));
+    _rouletteState.setItemVal((new Random().nextInt(rouletteColors.length).roundToDouble()));
+    _assignTweenValueToResult();
     _rouletteState.resetWinner();
     _rouletteState.start();
   }
 
   void roll() {
     _setNewValuesOnRoll();
-    _assignTweenValueToResult();
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 10),
@@ -98,8 +109,9 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
-    if (_stateProvider.tweenValue != null) {
-      _animation = Tween(begin: -1.0, end: _rouletteState.tweenValue.roundToDouble() + 15)
+    if (_rouletteState.tweenValue != null) {
+      _animation = Tween(
+              begin: -1.0, end: _rouletteState.tweenValue + 15)
           .animate(_animation);
     }
 
