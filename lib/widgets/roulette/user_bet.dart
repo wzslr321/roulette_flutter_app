@@ -30,16 +30,12 @@ class UserBet extends StatelessWidget {
                   InkWell(
                     onTap: _usersBet.betGreen,
                     child: const DefaultTextWidget(
-                      textContent: 'Bet on gren',
+                      textContent: 'Bet on green',
                     ),
                   ),
                 ],
               )
-            : Container(
-                child: const DefaultTextWidget(
-                  textContent: 'Deposit money to bet!',
-                ),
-              );
+            : SizedBox();
       },
     );
   }

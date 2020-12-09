@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../models/default_text_model.dart';
+import '../../models/default_text_model.dart';
 
 class HeaderInformation extends StatelessWidget {
   final BoxConstraints constraints;

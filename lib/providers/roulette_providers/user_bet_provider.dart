@@ -22,4 +22,9 @@ class UsersBet with ChangeNotifier {
     _userBet = rouletteColorResult.Green;
     notifyListeners();
   }
+
+  void resetBet() {
+    _userBet = null;
+    notifyListeners();
+  }
 }

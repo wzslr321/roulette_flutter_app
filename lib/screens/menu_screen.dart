@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/menu_and_profile_header.dart';
+import '../widgets/menu/menu_and_profile_header.dart';
 import '../widgets/menu/menu_quotes.dart';
 import '../models/scrollable_menu_model.dart';
 import '../widgets/menu/menu_game_buttons.dart';

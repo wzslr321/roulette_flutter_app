@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_helper/providers/roulette_providers/user_bet_provider.dart';
 import 'dart:math';
 
 import '../../models/default_text_model.dart';
@@ -27,7 +28,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
         int _fraction = ((1 / dataMap.length) * 1000).round();
         int _randTweenValue;
         while (
-            (_randTweenValue == itemsIndex[i - 1]) || _randTweenValue == null) {
+        (_randTweenValue == itemsIndex[i - 1]) || _randTweenValue == null) {
           _randTweenValue =
               new Random().nextInt(125) + (_tweenRandMax - _fraction);
         }
@@ -52,7 +53,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _rouletteState.setTweenVal(0);
     _rouletteState.resetResult();
     double _newTweenVal =
-        new Random().nextInt(rouletteColors.length).roundToDouble();
+    new Random().nextInt(rouletteColors.length).roundToDouble();
     _rouletteState.setTweenVal(_newTweenVal);
     _rouletteState.setItemVal(_newTweenVal, () => _assignTweenValueToResult());
     _rouletteState.resetWinner();
@@ -102,6 +103,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
     MediaQueryData queryData = MediaQuery.of(context);
 
     RouletteState _stateProvider = Provider.of<RouletteState>(context);
+    UsersBet _usersBet = Provider.of<UsersBet>(context);
 
     _rouletteState = _stateProvider;
 
@@ -135,17 +137,17 @@ class RouletteAnimationState extends State<RouletteAnimation>
               color: Colors.black,
             ),
           ),
-          Container(
+           _usersBet.bet != null ? Container(
             width: queryData.size.width * 0.2,
             child: ElevatedButton(
                 onPressed: () {
                   roll();
                   alignmentAnimate();
                 },
-                child: const DefaultTextWidget(
+                child:const DefaultTextWidget(
                   textContent: 'Roll!',
                 )),
-          )
+          ) : SizedBox()
         ],
       ),
     );

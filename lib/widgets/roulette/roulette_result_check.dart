@@ -57,23 +57,29 @@ class RouletteResult extends StatelessWidget {
       _didEndOn();
       _didUserWin();
       assignMoney();
+      _usersBet.resetBet();
       _rouletteState.resetEnd();
     }
+
+    print(_rouletteState.itemValue);
 
     return Column(
       children: <Widget>[
         Container(
           color: Colors.green,
           child: DefaultTextWidget(
-              textContent: _rouletteState.isActive == false
-                  ? 'Try your chances!'
-                  : _rouletteState.isFinished == false
-                      ? 'You...'
-                      : _rouletteState.isWinner == null
-                          ? 'You...'
-                          : _rouletteState.isWinner != false
-                              ? 'You won!'
-                              : 'You lost'),
+              textContent: (_rouletteState.isActive == false) &&
+                      _investedMoney.investedMoney == 0
+                  ? 'Deposit money and try your chances!'
+                  : _investedMoney.investedMoney != 0 && _usersBet.bet == null
+                      ? 'Bet and start rolling!'
+                      : _rouletteState.itemValue == null
+                          ? "If you don't click the button, you are already loser"
+                          : _rouletteState.isWinner == null
+                              ? 'You...'
+                              : _rouletteState.isWinner != false
+                                  ? 'You won!'
+                                  : 'You lost'),
         ),
       ],
     );

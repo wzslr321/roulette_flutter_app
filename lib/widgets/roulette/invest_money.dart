@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/money_providers/available_money_provider.dart';
+import '../../models/default_text_model.dart';
 import '../../providers/money_providers/invested_money_provider.dart';
 
 class InvestMoney extends StatefulWidget {
@@ -21,7 +22,7 @@ class _InvestMoneyState extends State<InvestMoney> {
 
     int _moneyInvested;
 
-    return Form(
+    return _investedMoney.investedMoney == 0 ? Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
@@ -51,6 +52,6 @@ class _InvestMoneyState extends State<InvestMoney> {
           )
         ],
       ),
-    );
+    ) : SizedBox();
   }
 }
