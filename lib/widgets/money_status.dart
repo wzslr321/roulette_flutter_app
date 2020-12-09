@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/default_text_class.dart';
-import '../providers/available_money_provider.dart';
-import '../providers/invested_money_provider.dart';
-import '../providers/roulette_state_provider.dart';
+import '../models/default_text_model.dart';
+import '../providers/money_providers/available_money_provider.dart';
+import '../providers/money_providers/invested_money_provider.dart';
+import '../providers/roulette_providers/roulette_state_provider.dart';
 
 class MoneyStatus extends StatelessWidget {
   @override

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
-import '../../models/default_text_class.dart';
-import '../../providers/roulette_state_provider.dart';
+import '../../models/default_text_model.dart';
+import '../../providers/roulette_providers/roulette_state_provider.dart';
 import './roulette_static_data.dart';
-import './roulette_pie_widget.dart';
+import './roulette_pie.dart';
 
 class RouletteAnimation extends StatefulWidget {
   @override
@@ -23,19 +23,16 @@ class RouletteAnimationState extends State<RouletteAnimation>
   void _assignTweenValueToResult() {
     for (var i = 1; i <= colorMaxValues.length; i++) {
       if (_rouletteState.tweenValue.round() == i) {
-        if (_rouletteState.tweenValue.round() != 0) {
-          int tweenRandMax = colorMaxValues[i - 1][i.toDouble()];
-          int randTweenValue = new Random().nextInt(125) + (tweenRandMax - 125);
-          for (var z = 1; z < itemsIndex.length; i++) {
-             while (randTweenValue == itemsIndex[i-1]) {
-               randTweenValue = new Random().nextInt(125) + (tweenRandMax - 125);
-            }
-            if (randTweenValue != itemsIndex[i-1]) {
-              _rouletteState.setTweenVal(randTweenValue / 1000);
-              break;
-            }
-          }
+        int _tweenRandMax = colorMaxValues[i - 1][i.toDouble()];
+        int _fraction = ((1 / dataMap.length) * 1000).round();
+        int _randTweenValue;
+        while (
+            (_randTweenValue == itemsIndex[i - 1]) || _randTweenValue == null) {
+          _randTweenValue =
+              new Random().nextInt(125) + (_tweenRandMax - _fraction);
         }
+        _randTweenValue != itemsIndex[i - 1] ??
+            _rouletteState.setTweenVal(_randTweenValue / 1000);
       }
     }
   }
@@ -54,9 +51,10 @@ class RouletteAnimationState extends State<RouletteAnimation>
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
     _rouletteState.resetResult();
-    double _newTweenVal = new Random().nextInt(rouletteColors.length).roundToDouble();
+    double _newTweenVal =
+        new Random().nextInt(rouletteColors.length).roundToDouble();
     _rouletteState.setTweenVal(_newTweenVal);
-    _rouletteState.setItemVal(_newTweenVal,() => _assignTweenValueToResult());
+    _rouletteState.setItemVal(_newTweenVal, () => _assignTweenValueToResult());
     _rouletteState.resetWinner();
     _rouletteState.start();
   }
@@ -110,8 +108,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     if (_rouletteState.tweenValue != null) {
-      _animation = Tween(
-              begin: -1.0, end: _rouletteState.tweenValue + 15)
+      _animation = Tween(begin: -1.0, end: _rouletteState.tweenValue + 15)
           .animate(_animation);
     }
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/mini_games/games_appbar.dart';
-import '../../models/default_text_class.dart';
-import '../../models/gradient_button_class.dart';
-import '../../providers/available_money_provider.dart';
+import '../../models/default_text_model.dart';
+import '../../models/gradient_button_model.dart';
+import '../../providers/money_providers/available_money_provider.dart';
 
 class SpeedGameScreen extends StatelessWidget {
   static const routeName = '/game/speed';

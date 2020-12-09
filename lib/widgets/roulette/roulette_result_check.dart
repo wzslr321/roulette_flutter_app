@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/default_text_class.dart';
-import '../../providers/user_bet_provider.dart';
-import '../../providers/roulette_state_provider.dart';
-import '../../providers/available_money_provider.dart';
-import '../../providers/invested_money_provider.dart';
+import '../../models/default_text_model.dart';
+import '../../providers/roulette_providers/user_bet_provider.dart';
+import '../../providers/roulette_providers/roulette_state_provider.dart';
+import '../../providers/money_providers/available_money_provider.dart';
+import '../../providers/money_providers/invested_money_provider.dart';
 import './roulette_static_data.dart';
 
 class RouletteResult extends StatelessWidget {
@@ -16,7 +16,7 @@ class RouletteResult extends StatelessWidget {
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
 
-    void _didEndOnGreen() {
+    void _didEndOnGreenOrBlack() {
       for (var i = 0; i < greenPartValues.length; i++) {
         if (_rouletteState.itemValue == greenPartValues[i]) {
           _rouletteState.resultIsGreen();
@@ -32,7 +32,7 @@ class RouletteResult extends StatelessWidget {
           _rouletteState.resultIsRed();
           break;
         }
-        _didEndOnGreen();
+        _didEndOnGreenOrBlack();
       }
     }
 
@@ -58,8 +58,6 @@ class RouletteResult extends StatelessWidget {
       _didUserWin();
       assignMoney();
       _rouletteState.resetEnd();
-      print(_rouletteState.itemValue);
-      print(_rouletteState.rouletteResult);
     }
 
     return Column(

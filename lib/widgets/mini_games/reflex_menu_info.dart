@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/default_text_class.dart';
+import '../../models/default_text_model.dart';
 
 class ReflexMenuInformation extends StatelessWidget {
   final String textContentLeft;

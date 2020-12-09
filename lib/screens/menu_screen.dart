@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/menu_and_profile_header.dart';
 import '../widgets/menu/menu_quotes.dart';
-import '../widgets/menu/scrollable_menu.dart';
+import '../models/scrollable_menu_model.dart';
 import '../widgets/menu/menu_game_buttons.dart';
 
 import 'mini-games/speed_game_screen.dart';

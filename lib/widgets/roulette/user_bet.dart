@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/default_text_class.dart';
-import '../../providers/invested_money_provider.dart';
-import '../../providers/user_bet_provider.dart';
+import '../../models/default_text_model.dart';
+import '../../providers/money_providers/invested_money_provider.dart';
+import '../../providers/roulette_providers/user_bet_provider.dart';
 
 class UserBet extends StatelessWidget {
   @override
