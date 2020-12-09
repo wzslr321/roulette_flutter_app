@@ -32,7 +32,6 @@ class RouletteAnimationState extends State<RouletteAnimation>
             }
             if (randTweenValue != itemsIndex[i-1]) {
               _rouletteState.setTweenVal(randTweenValue / 1000);
-              print(_rouletteState.tweenValue);
               break;
             }
           }
@@ -57,8 +56,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
     _rouletteState.resetResult();
     double _newTweenVal = new Random().nextInt(rouletteColors.length).roundToDouble();
     _rouletteState.setTweenVal(_newTweenVal);
-    _rouletteState.setItemVal(_newTweenVal);
-    _assignTweenValueToResult();
+    _rouletteState.setItemVal(_newTweenVal,() => _assignTweenValueToResult());
     _rouletteState.resetWinner();
     _rouletteState.start();
   }

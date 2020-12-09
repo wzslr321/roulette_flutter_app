@@ -58,8 +58,9 @@ class RouletteState with ChangeNotifier {
     notifyListeners();
   }
 
-  void setItemVal(double val){
+  void setItemVal(double val , cb){
     _itemVal = val;
+    cb();
     notifyListeners();
   }
 
