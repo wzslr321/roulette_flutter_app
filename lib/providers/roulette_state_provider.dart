@@ -86,4 +86,7 @@ class RouletteState with ChangeNotifier {
   void resultIsGreen(){
     _result = rouletteColorResult.Green;
   }
+  void resetResult(){
+    _result = null;
+  }
 }

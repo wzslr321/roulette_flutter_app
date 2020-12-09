@@ -54,8 +54,10 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   void _setNewValuesOnRoll() {
     _rouletteState.setTweenVal(0);
-    _rouletteState.setTweenVal((new Random().nextInt(rouletteColors.length).roundToDouble()));
-    _rouletteState.setItemVal((new Random().nextInt(rouletteColors.length).roundToDouble()));
+    _rouletteState.resetResult();
+    double _newTweenVal = new Random().nextInt(rouletteColors.length).roundToDouble();
+    _rouletteState.setTweenVal(_newTweenVal);
+    _rouletteState.setItemVal(_newTweenVal);
     _assignTweenValueToResult();
     _rouletteState.resetWinner();
     _rouletteState.start();

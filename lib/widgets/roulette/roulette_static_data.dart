@@ -43,3 +43,14 @@ List<Map<double, int>> colorMaxValues = [
   {7.0: 875},
   {8.0: 1000},
 ];
+
+List<double> redPartValues = [
+  2.0,
+  5.0,
+  7.0,
+];
+
+List<double> greenPartValues = [
+  4.0,
+  9.0
+];

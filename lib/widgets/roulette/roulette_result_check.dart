@@ -6,6 +6,7 @@ import '../../providers/user_bet_provider.dart';
 import '../../providers/roulette_state_provider.dart';
 import '../../providers/available_money_provider.dart';
 import '../../providers/invested_money_provider.dart';
+import './roulette_static_data.dart';
 
 class RouletteResult extends StatelessWidget {
   @override
@@ -15,41 +16,23 @@ class RouletteResult extends StatelessWidget {
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
 
-    void _didEndOnRed() {
-      List<double> _redPartValues = [
-        2.0,
-        5.0,
-        7.0,
-      ];
-      for (var i = 0; i < _redPartValues.length - 1; i++) {
-        if (_rouletteState.itemValue == _redPartValues[i]) {
-          print(_rouletteState.itemValue);
-          print("RED");
-          _rouletteState.resultIsRed();
-          break;
-        }
-      }
-    }
-
     void _didEndOnGreen() {
-      List<double> _greenPartValues = [4.0,9.0];
-      for (var i = 0; i < _greenPartValues.length - 1; i ++) {
-        if (_rouletteState.itemValue == _greenPartValues[i] ) {
-          print(_rouletteState.itemValue);
-          print("GREEN");
+      for (var i = 0; i < greenPartValues.length; i++) {
+        if (_rouletteState.itemValue == greenPartValues[i]) {
           _rouletteState.resultIsGreen();
           break;
         }
+        _rouletteState.resultIsBlack();
       }
     }
 
-    void _didEndOnBlack() {
-      if (_rouletteState.rouletteResult != rouletteColorResult.Red) {
-        if (_rouletteState.rouletteResult != rouletteColorResult.Green) {
-          print(_rouletteState.itemValue);
-          print("BLACK");
-          _rouletteState.resultIsBlack();
+    void _didEndOn() {
+      for (var i = 0; i < redPartValues.length; i++) {
+        if (_rouletteState.itemValue == redPartValues[i]) {
+          _rouletteState.resultIsRed();
+          break;
         }
+        _didEndOnGreen();
       }
     }
 
@@ -71,12 +54,12 @@ class RouletteResult extends StatelessWidget {
     }
 
     if (_rouletteState.isFinished == true) {
-      _didEndOnRed();
-      _didEndOnGreen();
-      _didEndOnBlack();
+      _didEndOn();
       _didUserWin();
       assignMoney();
       _rouletteState.resetEnd();
+      print(_rouletteState.itemValue);
+      print(_rouletteState.rouletteResult);
     }
 
     return Column(
