@@ -12,6 +12,8 @@ class InvestMoney extends StatefulWidget {
   _InvestMoneyState createState() => _InvestMoneyState();
 }
 
+String _moneyValidationFailString;
+
 class _InvestMoneyState extends State<InvestMoney> {
   @override
   Widget build(BuildContext context) {
@@ -22,22 +24,20 @@ class _InvestMoneyState extends State<InvestMoney> {
     MediaQueryData queryData = MediaQuery.of(context);
 
     int _moneyInvested;
-    String _moneyValidationFailString;
 
     void _moneyValidation() {
       if (_userMoney.quantity < _moneyInvested) {
-        print('xd');
         setState(() {
           _moneyValidationFailString = "You do not have enough money to bet!";
-          print(_moneyValidationFailString);
         });
       } else {
+        setState(() {
+          _moneyValidationFailString = null;
+        });
         _userMoney.removeMoney(_moneyInvested);
         _investedMoney.investMoney(_moneyInvested);
       }
     }
-
-    print(_moneyValidationFailString);
 
     return Column(
       children: [
@@ -73,14 +73,14 @@ class _InvestMoneyState extends State<InvestMoney> {
                 ),
               )
             : SizedBox(),
-        Container(
+        _moneyValidationFailString != null ? Container(
           height: queryData.size.height * 0.1,
           width: double.infinity,
           color: Colors.green,
           child: Text(
-            _moneyValidationFailString ?? _moneyValidationFailString,
+            _moneyValidationFailString ,
           ),
-        )
+        ) : SizedBox(),
       ],
     );
   }

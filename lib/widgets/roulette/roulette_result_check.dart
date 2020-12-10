@@ -61,8 +61,6 @@ class RouletteResult extends StatelessWidget {
       _rouletteState.resetEnd();
     }
 
-    print(_rouletteState.itemValue);
-
     return Column(
       children: <Widget>[
         Container(

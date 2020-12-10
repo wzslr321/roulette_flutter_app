@@ -25,6 +25,5 @@ class UsersBet with ChangeNotifier {
 
   void resetBet() {
     _userBet = null;
-    notifyListeners();
   }
 }

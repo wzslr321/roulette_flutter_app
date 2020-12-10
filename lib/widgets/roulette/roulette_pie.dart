@@ -16,7 +16,7 @@ class RoulettePie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform(
-      alignment: const FractionalOffset(0.0, 0.0),
+      alignment: const FractionalOffset(2.0, 0.0),
       transform: Matrix4.rotationZ(animationAlignment.value),
       child: RotationTransition(
         turns: spinAnimation,
