@@ -102,7 +102,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData queryData = MediaQuery.of(context);
+    MediaQueryData _queryData = MediaQuery.of(context);
 
     UsersBet _usersBet = Provider.of<UsersBet>(context);
     RouletteState _stateProvider = Provider.of<RouletteState>(context);
@@ -126,7 +126,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.00),
       ),
-      width: queryData.size.width * 0.5,
+      width: _queryData.size.width * 0.5,
       child: Column(
         children: <Widget>[
           RoulettePie(
@@ -134,14 +134,14 @@ class RouletteAnimationState extends State<RouletteAnimation>
             spinAnimation: _animation,
           ),
           SizedBox(
-            height: queryData.size.height * 0.02,
-            width: queryData.size.width * 0.005,
+            height: _queryData.size.height * 0.02,
+            width: _queryData.size.width * 0.005,
             child: Container(
               color: Colors.black,
             ),
           ),
           _usersBet.bet != null ? Container(
-            width: queryData.size.width * 0.2,
+            width: _queryData.size.width * 0.2,
             child: ElevatedButton(
                 onPressed: () {
                   roll();

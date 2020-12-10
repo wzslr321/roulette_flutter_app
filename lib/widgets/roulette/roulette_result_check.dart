@@ -15,6 +15,7 @@ class RouletteResult extends StatelessWidget {
     RouletteState _rouletteState = Provider.of<RouletteState>(context);
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
+    MediaQueryData _queryData = MediaQuery.of(context);
 
     void _didEndOnGreen() {
       for (var i = 0; i < greenPartValues.length; i++) {
@@ -64,8 +65,11 @@ class RouletteResult extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          color: Colors.green,
+          margin: EdgeInsets.only(top: _queryData.size.height * 0.05),
+          padding: const EdgeInsets.all(10),
+          color: Colors.cyan,
           child: DefaultTextWidget(
+              fontColor: Colors.white70,
               textContent: _rouletteState.isActive == false
                   ? 'Try your chances!'
                   : _rouletteState.isFinished == false
