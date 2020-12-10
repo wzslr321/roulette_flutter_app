@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/default_text_model.dart';
-import '../../providers/roulette_providers/user_bet_provider.dart';
-import '../../providers/roulette_providers/roulette_state_provider.dart';
-import '../../providers/money_providers/available_money_provider.dart';
-import '../../providers/money_providers/invested_money_provider.dart';
+import '../../models/default_text_class.dart';
+import '../../providers/user_bet_provider.dart';
+import '../../providers/roulette_state_provider.dart';
+import '../../providers/available_money_provider.dart';
+import '../../providers/invested_money_provider.dart';
 import './roulette_static_data.dart';
 
 class RouletteResult extends StatelessWidget {
@@ -16,7 +16,7 @@ class RouletteResult extends StatelessWidget {
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
 
-    void _didEndOnGreenOrBlack() {
+    void _didEndOnGreen() {
       for (var i = 0; i < greenPartValues.length; i++) {
         if (_rouletteState.itemValue == greenPartValues[i]) {
           _rouletteState.resultIsGreen();
@@ -32,7 +32,7 @@ class RouletteResult extends StatelessWidget {
           _rouletteState.resultIsRed();
           break;
         }
-        _didEndOnGreenOrBlack();
+        _didEndOnGreen();
       }
     }
 
@@ -57,8 +57,8 @@ class RouletteResult extends StatelessWidget {
       _didEndOn();
       _didUserWin();
       assignMoney();
-      _usersBet.resetBet();
       _rouletteState.resetEnd();
+      _usersBet.resetBet();
     }
 
     return Column(
@@ -66,18 +66,15 @@ class RouletteResult extends StatelessWidget {
         Container(
           color: Colors.green,
           child: DefaultTextWidget(
-              textContent: (_rouletteState.isActive == false) &&
-                      _investedMoney.investedMoney == 0
-                  ? 'Deposit money and try your chances!'
-                  : _investedMoney.investedMoney != 0 && _usersBet.bet == null
-                      ? 'Bet and start rolling!'
-                      : _rouletteState.itemValue == null
-                          ? "If you don't click the button, you are already loser"
-                          : _rouletteState.isWinner == null
-                              ? 'You...'
-                              : _rouletteState.isWinner != false
-                                  ? 'You won!'
-                                  : 'You lost'),
+              textContent: _rouletteState.isActive == false
+                  ? 'Try your chances!'
+                  : _rouletteState.isFinished == false
+                      ? 'You...'
+                      : _rouletteState.isWinner == null
+                          ? 'You...'
+                          : _rouletteState.isWinner != false
+                              ? 'You won!'
+                              : 'You lost'),
         ),
       ],
     );

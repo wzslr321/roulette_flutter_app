@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 enum rouletteColorResult {
-  Black,
-  Red,
-  Green,
+    Black,
+    Red,
+    Green,
 }
 
 class RouletteState with ChangeNotifier {
@@ -18,7 +18,7 @@ class RouletteState with ChangeNotifier {
     return _tweenVal;
   }
 
-  double get itemValue {
+  double get itemValue{
     return _itemVal;
   }
 
@@ -37,6 +37,7 @@ class RouletteState with ChangeNotifier {
   rouletteColorResult get rouletteResult {
     return _result;
   }
+
 
   void start() {
     _didStart = true;
@@ -57,7 +58,7 @@ class RouletteState with ChangeNotifier {
     notifyListeners();
   }
 
-  void setItemVal(double val, cb) {
+  void setItemVal(double val , cb){
     _itemVal = val;
     cb();
     notifyListeners();
@@ -83,11 +84,10 @@ class RouletteState with ChangeNotifier {
     _result = rouletteColorResult.Black;
   }
 
-  void resultIsGreen() {
+  void resultIsGreen(){
     _result = rouletteColorResult.Green;
   }
-
-  void resetResult() {
+  void resetResult(){
     _result = null;
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/menu/menu_and_profile_header.dart';
-import '../providers/money_providers/available_money_provider.dart';
-import '../models/default_text_model.dart';
-import '../providers/profile_providers/profile_level_provider.dart';
-import '../models/gradient_button_model.dart';
+import '../widgets/menu_and_profile_header.dart';
+import '../providers/available_money_provider.dart';
+import '../models/default_text_class.dart';
+import '../providers/profile_level_provider.dart';
+import '../models/gradient_button_class.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile';

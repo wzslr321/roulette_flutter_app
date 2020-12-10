@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/gradient_button_model.dart';
-import '../../models/default_text_model.dart';
+import '../../models/gradient_button_class.dart';
+import '../../models/default_text_class.dart';
 
 class GameButton extends StatelessWidget {
   final String itemText;

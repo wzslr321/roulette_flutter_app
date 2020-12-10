@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'roulette_state_provider.dart';
+import './roulette_state_provider.dart';
+
 
 class UsersBet with ChangeNotifier {
   rouletteColorResult _userBet;

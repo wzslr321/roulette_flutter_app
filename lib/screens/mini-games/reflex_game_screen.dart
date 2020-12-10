@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'dart:math';
 
 import '../../widgets/mini_games/games_appbar.dart';
-import '../../models/default_text_model.dart';
-import '../../models/gradient_button_model.dart';
-import '../../providers/money_providers/available_money_provider.dart';
+import '../../models/default_text_class.dart';
+import '../../models/gradient_button_class.dart';
+import '../../providers/available_money_provider.dart';
 import '../../widgets/mini_games/reflex_menu_info.dart';
 
 class ReflexGameScreen extends StatefulWidget {
@@ -15,10 +15,9 @@ class ReflexGameScreen extends StatefulWidget {
   _ReflexGameScreenState createState() => _ReflexGameScreenState();
 }
 
-// This file is insanely awful, and I am aware of it.
-// It is  made chaotic, because I do not like this idea of mini-game
-// I have made it just to temporary give a possibility to earn money.
-// Mini-games are  going to be totally rebuild someday.
+// This file is awful, and I am aware of it.
+// It is  made chaotic, just to give a possibility to earn money.
+// Mini-games most probably are  going to be totally rebuild.
 
 bool _isAccepted;
 int _timeDotRenderMs;

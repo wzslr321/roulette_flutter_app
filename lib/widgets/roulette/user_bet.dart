@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/default_text_model.dart';
-import '../../providers/money_providers/invested_money_provider.dart';
-import '../../providers/roulette_providers/user_bet_provider.dart';
+import '../../models/default_text_class.dart';
+import '../../providers/invested_money_provider.dart';
+import '../../providers/user_bet_provider.dart';
 
 class UserBet extends StatelessWidget {
   @override
@@ -30,12 +30,16 @@ class UserBet extends StatelessWidget {
                   InkWell(
                     onTap: _usersBet.betGreen,
                     child: const DefaultTextWidget(
-                      textContent: 'Bet on green',
+                      textContent: 'Bet on gren',
                     ),
                   ),
                 ],
               )
-            : SizedBox();
+            : Container(
+                child: const DefaultTextWidget(
+                  textContent: 'Deposit money to bet!',
+                ),
+              );
       },
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/default_text_model.dart';
+import '../../models/default_text_class.dart';
 
 class RouletteItem extends StatelessWidget {
   final String text;

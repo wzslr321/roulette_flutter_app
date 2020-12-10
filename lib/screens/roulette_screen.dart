@@ -4,7 +4,7 @@ import '../widgets/roulette/roulette_animations.dart';
 import '../widgets/roulette/user_bet.dart';
 import '../widgets/roulette/invest_money.dart';
 import '../widgets/roulette/roulette_result_check.dart';
-import '../widgets/roulette/money_status.dart';
+import '../widgets/money_status.dart';
 
 class RouletteScreen extends StatefulWidget {
   static const routeName = '/roulette';
