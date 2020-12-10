@@ -123,7 +123,7 @@ class RouletteAnimationState extends State<RouletteAnimation>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.00),
       ),
-      width: queryData.size.width * 0.5,
+      width: queryData.size.width * 0.4,
       child: Column(
         children: <Widget>[
           RoulettePie(

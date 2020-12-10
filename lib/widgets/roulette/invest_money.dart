@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/money_providers/available_money_provider.dart';
-import '../../models/default_text_model.dart';
 import '../../providers/money_providers/invested_money_provider.dart';
 
 class InvestMoney extends StatefulWidget {
@@ -20,38 +19,69 @@ class _InvestMoneyState extends State<InvestMoney> {
     Money _userMoney = Provider.of<Money>(context);
     InvestedMoney _investedMoney = Provider.of<InvestedMoney>(context);
 
-    int _moneyInvested;
+    MediaQueryData queryData = MediaQuery.of(context);
 
-    return _investedMoney.investedMoney == 0 ? Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly
-            ],
-            decoration:
-                const InputDecoration(hintText: 'How much do you want to bet?'),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter money amount first';
-              }
-              _moneyInvested = int.parse(value);
-              return null;
-            },
+    int _moneyInvested;
+    String _moneyValidationFailString;
+
+    void _moneyValidation() {
+      if (_userMoney.quantity < _moneyInvested) {
+        print('xd');
+        setState(() {
+          _moneyValidationFailString = "You do not have enough money to bet!";
+          print(_moneyValidationFailString);
+        });
+      } else {
+        _userMoney.removeMoney(_moneyInvested);
+        _investedMoney.investMoney(_moneyInvested);
+      }
+    }
+
+    print(_moneyValidationFailString);
+
+    return Column(
+      children: [
+        _investedMoney.investedMoney == 0
+            ? Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: const InputDecoration(
+                          hintText: 'How much do you want to bet?'),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter money amount first';
+                        }
+                        _moneyInvested = int.parse(value);
+                        return null;
+                      },
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          _moneyValidation();
+                        }
+                      },
+                      child: const Text("Submit"),
+                    )
+                  ],
+                ),
+              )
+            : SizedBox(),
+        Container(
+          height: queryData.size.height * 0.1,
+          width: double.infinity,
+          color: Colors.green,
+          child: Text(
+            _moneyValidationFailString ?? _moneyValidationFailString,
           ),
-          ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState.validate()) {
-                _userMoney.removeMoney(_moneyInvested);
-                _investedMoney.investMoney(_moneyInvested);
-              }
-            },
-            child: const Text("Submit"),
-          )
-        ],
-      ),
-    ) : SizedBox();
+        )
+      ],
+    );
   }
 }
