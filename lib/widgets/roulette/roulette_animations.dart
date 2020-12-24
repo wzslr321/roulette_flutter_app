@@ -27,10 +27,8 @@ class RouletteAnimationState extends State<RouletteAnimation>
         if (_rouletteState.tweenValue.round() != 0) {
           int tweenRandMax = colorMaxValues[i - 1][i.toDouble()];
           int randTweenValue = new Random().nextInt(125) + (tweenRandMax - 125);
-          for (var z = 1; z < itemsIndex.length; i++) {
              while (randTweenValue == itemsIndex[i-1]) {
                randTweenValue = new Random().nextInt(125) + (tweenRandMax - 125);
-            }
             if (randTweenValue != itemsIndex[i-1]) {
               _rouletteState.setTweenVal(randTweenValue / 1000);
               break;
